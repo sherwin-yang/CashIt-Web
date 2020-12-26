@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0 25px;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Nunito';
+}
+
+html body {
+    background-color: #f2f2f2;
+}
+
+/* header */
+
+header{
+    margin-top: 25px;
+    padding: 25px 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px 1px #cccccc;
+}
+
+header div .photo-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header div .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header div .photo-status .photo {
+    width: 125px;
+    height: 125px;
+    background-image: url('../assets/cover.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 100%;
+    margin-bottom: 10px;
+    border: 3px solid #e5e5e5;
+}
+
+header div .photo-status .status {
+    width: fit-content;
+    height: fit-content;
+    font-size: 14px;
+    padding: 8px 20px;
+    background-color: #00e676;
+    border-radius: 20px;
+    border: 2px solid #00a354;
+}
+
+header div .info div .log-out {
+    width: fit-content;
+}
+
+/* header */
+
+.main {
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 1px #cccccc;
+}
+
+/* navigation */
+
+.navigation {
+    margin: 10px 0;
+}
+
+.navigation nav ul li {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.navigation nav ul li:hover {
+    cursor: pointer;
+    padding: 10px 0 7px 0;
+    border-bottom: 3px solid #6610f2;
+}
+
+.navigation nav ul li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #6610f2;
+    font-size: 16px;
+}
+
+/* navigation */
+
+/* appointment content */
+
+.appointment {
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 0px #cccccc;
+    padding: 20px 20px 10px 20px;
+    margin-bottom: 20px;
+}
+
+/* appointment content */
