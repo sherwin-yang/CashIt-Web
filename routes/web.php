@@ -18,5 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/appointment', function () {
-    return view('mc_appointment');
+    return view('main-view/mc_appointment');
+});
+
+Route::get('/currency', function () {
+    return view('main-view/mc_currency');
+});
+
+Route::get('/test', function () {
+    return view('test');
 });

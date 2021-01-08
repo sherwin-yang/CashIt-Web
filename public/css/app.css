@@ -1,20 +1,20 @@
 * {
     margin: 0;
-    padding: 0 25px;
     list-style: none;
     text-decoration: none;
-    font-family: 'Nunito';
+    font-family: "Nunito";
 }
 
 html body {
     background-color: #f2f2f2;
+    padding: 0 25px;
 }
 
 /* header */
 
-header{
+header {
     margin-top: 25px;
-    padding: 25px 0;
+    padding: 25px 25px;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background-color: #ffffff;
@@ -38,7 +38,7 @@ header div .info {
 header div .photo-status .photo {
     width: 125px;
     height: 125px;
-    background-image: url('../assets/cover.jpg');
+    background-image: url("../assets/cover.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -64,6 +64,7 @@ header div .info div .log-out {
 /* header */
 
 .main {
+    padding: 0 25px;
     border-radius: 5px;
     border: 1px solid #e5e5e5;
     background-color: #ffffff;
@@ -99,15 +100,102 @@ header div .info div .log-out {
 
 /* navigation */
 
-/* appointment content */
+/* appointment/currency table */
 
-.appointment {
+.appointment,
+.currency {
     border-radius: 5px;
     border: 1px solid #e5e5e5;
     background-color: #ffffff;
     box-shadow: 0 0 10px 0px #cccccc;
     padding: 20px 20px 10px 20px;
     margin-bottom: 20px;
+    padding: 25px 25px;
 }
 
-/* appointment content */
+/* appointment/currency table */
+
+/* myModal */
+
+.myModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 5px;
+    z-index: 10;
+    background-color: #e6e6e6;
+    box-shadow: 0 0 10px 1px #cccccc;
+    border: 1px solid #e6e6e6;
+    width: 500px;
+    height: 250px;
+    max-width: 80%;
+}
+
+.myModal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.myModal .header button {
+    margin: 5px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.myModal .content {
+    flex-direction: column;
+    text-align: center;
+    height: 200px;
+}
+
+/* EDIT CURRENCY  */
+
+.myModal .content form {
+    margin-bottom: 15px;
+}
+
+.myModal .content form div div {
+    margin: 1px 0;
+}
+
+.myModal .content form div div div {
+    display: flex;
+    align-items: center;
+}
+
+/* FINISH APPOINTMENT */
+
+.myModal .content .message {
+    font-size: 18px;
+}
+
+.myModal .content .action-button {
+    display: flex;
+    justify-content: center;
+}
+
+.myModal .content .action-button button {
+    margin: 5px;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* myModal */
