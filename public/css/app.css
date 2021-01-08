@@ -199,3 +199,82 @@ header div .info div .log-out {
 }
 
 /* myModal */
+
+
+/* Login, Register, Edit Page */
+.form,.editform label {
+  position: relative;
+  left: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: right;
+  width: 490px;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.form,.editform input[type=text]{
+  height: 20px;
+  flex: 0 0 260px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.form,.editform input[type=password] {
+    height: 20px;
+    flex: 0 0 260px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.form,.editform a{
+      font-size: 20px;
+}
+
+.form,.editform input[type=hour] {
+  position: relative;
+  width: 22%;
+  padding: 5px;
+  height: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Set a style for the submit button */
+.editform .registerbtn {
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    left: 10%;
+    color: black;
+    padding: 10px 10px;
+    border: 1px solid #111;
+    cursor: pointer;
+    width: 40%;
+  }
+
+.form .registerbtn{
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    left: 20%;
+    color: black;
+    padding: 10px 10px;
+    border: 1px solid #111;
+    cursor: pointer;
+    width: 60%;
+}
+
+.editform .cancelbtn {
+  background-color: #ff666e;
+  font-weight: bold;
+  font-size: 16px;
+  position: relative;
+  left: 10%;
+  color: black;
+  padding: 10px 10px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  width: 40%;
+}
