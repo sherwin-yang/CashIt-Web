@@ -25,6 +25,13 @@ Route::get('/currency', function () {
     return view('main-view/mc_currency');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/register', 'RegistrationController@create');
+
+Route::post('register', 'RegistrationController@store');
+
+Route::get('/login', 'SessionsController@create');
+
+Route::post('/login', 'SessionsController@store');
+
+Route::get('/logout', 'SessionsController@destroy');
+
