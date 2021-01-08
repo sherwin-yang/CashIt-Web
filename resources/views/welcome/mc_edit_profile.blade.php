@@ -1,8 +1,6 @@
-@extends('main-view/layout/mc_main')
+@extends('welcome/layout/welcome')
 
-@section('title', 'EditProfile')
-
-@section('EditProfile')
+@section('editProfile')
 
 
 <!-- Edit Profile Page -->
@@ -25,3 +23,5 @@
             <button type="cancel" class="cancelbtn">CANCEL</button>  
         </div>
     </div>
+
+@endsection

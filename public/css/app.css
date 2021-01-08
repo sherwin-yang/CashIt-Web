@@ -202,6 +202,11 @@ header div .info div .log-out {
 
 
 /* Login, Register, Edit Page */
+.editform{
+    position: relative;
+    top: 20%;
+    margin-top: 20%;
+}
 .form,.editform label {
   position: relative;
   left: 25%;
@@ -220,21 +225,29 @@ header div .info div .log-out {
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .form,.editform input[type=password] {
     height: 20px;
     flex: 0 0 260px;
     margin-left: 10px;
     margin-right: 10px;
 }
-.form,.editform a{
-      font-size: 20px;
+
+b{
+    font-size: 50px;
+    font-weight: bold;
+    color: #6610f2;
+    position: relative;
+    left: 42%;
+    line-height: 900%;
+    
 }
 
 .form,.editform input[type=hour] {
   position: relative;
   width: 22%;
   padding: 5px;
-  height: 10px;
+  height: 20px;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -253,17 +266,20 @@ header div .info div .log-out {
     width: 40%;
   }
 
-.form .registerbtn{
+.registerbtn{
+    width: 50%;
+    height: 50px;
+    position: relative;
+    left: 25%;
+    top: 10%;
     background-color: #fff;
     font-weight: bold;
     font-size: 16px;
-    position: relative;
-    left: 20%;
+    margin-bottom: 20px;
     color: black;
-    padding: 10px 10px;
     border: 1px solid #111;
     cursor: pointer;
-    width: 60%;
+    
 }
 
 .editform .cancelbtn {
