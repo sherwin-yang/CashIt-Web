@@ -18,7 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('/appointment', function () {
-    return view('mc_appointment');
+    return view('main-view/mc_appointment');
+});
+
+Route::get('/currency', function () {
+    return view('main-view/mc_currency');
 });
 
 Route::get('/register', 'RegistrationController@create');
@@ -30,3 +34,4 @@ Route::get('/login', 'SessionsController@create');
 Route::post('/login', 'SessionsController@store');
 
 Route::get('/logout', 'SessionsController@destroy');
+
