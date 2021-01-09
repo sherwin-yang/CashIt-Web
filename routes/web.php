@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome/mc_welcome');
+    return view('other-views/mc_welcome');
 });
 
 Route::get('/appointment', function () {
@@ -26,13 +26,13 @@ Route::get('/currency', function () {
 });
 
 Route::get('/login', function () {
-    return view('welcome/mc_login');
+    return view('other-views/mc_login');
 });
 
 Route::get('/register', function () {
-    return view('welcome/mc_register');
+    return view('other-views/mc_register');
 });
 
 Route::get('/editProfile', function () {
-    return view('welcome/mc_edit_profile');
+    return view('other-views/mc_edit_profile');
 });
