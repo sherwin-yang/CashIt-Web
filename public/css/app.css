@@ -11,7 +11,6 @@ html body {
 }
 
 /* header */
-
 header {
     margin-top: 25px;
     padding: 25px 25px;
@@ -61,8 +60,7 @@ header div .info div .log-out {
     width: fit-content;
 }
 
-/* header */
-
+/* main */
 .main {
     padding: 0 25px;
     border-radius: 5px;
@@ -72,7 +70,6 @@ header div .info div .log-out {
 }
 
 /* navigation */
-
 .navigation {
     margin: 10px 0;
 }
@@ -98,10 +95,7 @@ header div .info div .log-out {
     font-size: 16px;
 }
 
-/* navigation */
-
 /* appointment/currency table */
-
 .appointment,
 .currency {
     border-radius: 5px;
@@ -113,10 +107,7 @@ header div .info div .log-out {
     padding: 25px 25px;
 }
 
-/* appointment/currency table */
-
 /* myModal */
-
 .myModal {
     position: fixed;
     top: 50%;
@@ -151,8 +142,9 @@ header div .info div .log-out {
     height: 200px;
 }
 
-/* EDIT CURRENCY  */
+/* myModal */
 
+/* ADD/EDIT CURRENCY */
 .myModal .content form {
     margin-bottom: 15px;
 }
@@ -167,7 +159,6 @@ header div .info div .log-out {
 }
 
 /* FINISH APPOINTMENT */
-
 .myModal .content .message {
     font-size: 18px;
 }
@@ -198,80 +189,20 @@ header div .info div .log-out {
     pointer-events: all;
 }
 
-/* myModal */
-
-
-/* Login, Register, Edit Page */
-.editform{
-    position: relative;
-    top: 20%;
-    margin-top: 20%;
-}
-.form,.editform label {
-  position: relative;
-  left: 25%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  text-align: right;
-  width: 490px;
-  line-height: 26px;
-  margin-bottom: 10px;
+/* welcome */
+.welcome {
+    text-align: center;
 }
 
-.form,.editform input[type=text]{
-  height: 20px;
-  flex: 0 0 260px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.form,.editform input[type=password] {
-    height: 20px;
-    flex: 0 0 260px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-b{
+.welcome h1 {
     font-size: 50px;
-    font-weight: bold;
     color: #6610f2;
-    position: relative;
-    left: 42%;
     line-height: 900%;
-    
 }
 
-.form,.editform input[type=hour] {
-  position: relative;
-  width: 22%;
-  padding: 5px;
-  height: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-/* Set a style for the submit button */
-.editform .registerbtn {
-    background-color: #fff;
-    font-weight: bold;
-    font-size: 16px;
-    position: relative;
-    left: 10%;
-    color: black;
-    padding: 10px 10px;
-    border: 1px solid #111;
-    cursor: pointer;
-    width: 40%;
-  }
-
-.registerbtn{
+.welcome .customButton {
     width: 50%;
     height: 50px;
-    position: relative;
-    left: 25%;
-    top: 10%;
     background-color: #fff;
     font-weight: bold;
     font-size: 16px;
@@ -279,18 +210,112 @@ b{
     color: black;
     border: 1px solid #111;
     cursor: pointer;
-    
 }
 
-.editform .cancelbtn {
-  background-color: #ff666e;
-  font-weight: bold;
-  font-size: 16px;
-  position: relative;
-  left: 10%;
-  color: black;
-  padding: 10px 10px;
-  border: 1px solid #fff;
-  cursor: pointer;
-  width: 40%;
+/* Login, Register, Edit Page */
+.form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form form div div {
+    margin: 3px 0;
+}
+
+.form form div div div input {
+    width: 100%;
+}
+
+.form form .operational .day {
+    display: flex;
+    align-items: center;
+}
+
+.form form .buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+/* Set a style for the submit button */
+.customButton {
+    width: 100%;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    padding: 20px 10px;
+    margin: 20px 0;
+    border: 1px solid #111111;
+    cursor: pointer;
+}
+
+.submitbtn {
+    width: 50%;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    padding: 10px 10px;
+    border: 1px solid #111111;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.cancelbtn {
+    width: 50%;
+    background-color: #ff666e;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    padding: 10px 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+/*
+.editform input[type="text"] {
+    height: 20px;
+    flex: 0 0 260px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.editform input[type="password"] {
+    height: 20px;
+    flex: 0 0 260px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.editform label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 490px;
+    line-height: 26px;
+    margin-bottom: 10px;
+}
+
+.editform input[type="hour"] {
+    position: relative;
+    width: 22%;
+    padding: 5px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+*/
