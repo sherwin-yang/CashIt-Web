@@ -58,6 +58,7 @@
 
         @yield('appointment')
         @yield('currency')
+        @yield('welcome')
     </div>
 
 </body>

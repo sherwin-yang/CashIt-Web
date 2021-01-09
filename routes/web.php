@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('other-views/mc_welcome');
 });
 
 Route::get('/appointment', function () {
@@ -25,13 +25,14 @@ Route::get('/currency', function () {
     return view('main-view/mc_currency');
 });
 
-Route::get('/register', 'RegistrationController@create');
+Route::get('/login', function () {
+    return view('other-views/mc_login');
+});
 
-Route::post('register', 'RegistrationController@store');
+Route::get('/register', function () {
+    return view('other-views/mc_register');
+});
 
-Route::get('/login', 'SessionsController@create');
-
-Route::post('/login', 'SessionsController@store');
-
-Route::get('/logout', 'SessionsController@destroy');
-
+Route::get('/editProfile', function () {
+    return view('other-views/mc_edit_profile');
+});
