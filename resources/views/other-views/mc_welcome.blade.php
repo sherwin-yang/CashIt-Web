@@ -1,4 +1,4 @@
-@extends('welcome/layout/welcome')
+@extends('other-views/layout/template')
 
 @section('welcome')
     <!-- Welcome Page -->
@@ -6,12 +6,12 @@
         <h1>Cash It!</h1>
         <div>
             <a href="/login">
-                <button href="/login" class="customButton">SIGN IN</button>
+                <button href="/login" class="customButton">MASUK</button>
             </a>
         </div>
         <div>
             <a href="/register">
-                <button class="customButton">SIGN UP</button>
+                <button class="customButton">DAFTARKAN</button>
             </a>
         </div>
     </div>

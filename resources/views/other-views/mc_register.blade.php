@@ -1,6 +1,7 @@
-@extends('welcome/layout/welcome')
+@extends('other-views/layout/template')
 
 @section('register')
+    <h1 class="register-login-title">Daftar</h1>
     <div class="form">
         <form action="">
             <div class="row">
@@ -14,7 +15,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Alamat :
+                        Alamat Lengkap :
                     </div>
                     <div class="col-6">
                         <input type="text" name="address" required />
@@ -34,6 +35,14 @@
                     </div>
                     <div class="col-6">
                         <input type="text" name="phoneNumber" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Logo atau Gambar Toko :
+                    </div>
+                    <div class="col-6">
+                        <input type="file" name="myImage" accept="image/*" />
                     </div>
                 </div>
                 <div class="row">
@@ -98,7 +107,7 @@
                         Email :
                     </div>
                     <div class="col-6">
-                        <input type="text" name="email" />
+                        <input type="email" name="email" />
                     </div>
                 </div>
                 <div class="row">
@@ -118,7 +127,7 @@
                     </div>
                 </div>
             </div>
-            <button class="customButton">SIGN UP</button>
+            <button class="customButton">DAFTAR AKUN BARU</button>
         </form>
     </div>
 @endsection

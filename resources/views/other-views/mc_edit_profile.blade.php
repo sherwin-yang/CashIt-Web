@@ -1,4 +1,4 @@
-@extends('welcome/layout/welcome')
+@extends('other-views/layout/template')
 
 @section('editProfile')
     <div class="form">
@@ -34,6 +34,14 @@
                     </div>
                     <div class="col-6">
                         <input type="text" name="phoneNumber" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        Logo atau Gambar Toko :
+                    </div>
+                    <div class="col-6">
+                        <input type="file" name="myImage" accept="image/*" />
                     </div>
                 </div>
                 <div class="row">
@@ -95,8 +103,8 @@
                 </div>
             </div>
             <div class="buttons">
-                <button type="submit" class="submitbtn">SUBMIT</button>
-                <button type="cancel" class="cancelbtn">CANCEL</button>
+                <button type="submit" class="submitbtn">UBAH</button>
+                <button type="cancel" class="cancelbtn">BATALKAN</button>
             </div>
         </form>
     </div>

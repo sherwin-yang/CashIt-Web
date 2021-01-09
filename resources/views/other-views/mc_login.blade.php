@@ -1,7 +1,8 @@
-@extends('welcome/layout/welcome')
+@extends('other-views/layout/template')
 
 @section('login')
     <!-- Login Page -->
+    <h1 class="register-login-title">Masuk</h1>
     <div class="form">
         <form action="">
             <div class="row">
@@ -22,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <button class="customButton">SIGN IN</button>
+            <button class="customButton">MASUK KE AKUN ANDA</button>
         </form>
     </div>
 @endsection

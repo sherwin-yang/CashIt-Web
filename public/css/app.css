@@ -213,6 +213,13 @@ header div .info div .log-out {
 }
 
 /* Login, Register, Edit Page */
+.register-login-title {
+    font-size: 50px;
+    color: #6610f2;
+    text-align: center;
+    margin-top: 50px;
+}
+
 .form {
     position: fixed;
     top: 50%;
