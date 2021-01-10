@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,5 @@ Route::get('/register', function () {
 Route::get('/editProfile', function () {
     return view('other-views/mc_edit_profile');
 });
+
+Route::get('/dbtesting', [RegistrationController::class, 'index']);
