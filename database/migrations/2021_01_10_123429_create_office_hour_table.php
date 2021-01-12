@@ -16,7 +16,6 @@ class CreateOfficeHourTable extends Migration
         Schema::create('office_hour', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('day');
-            $table->string('status');
             $table->time('openTime');
             $table->time('closeTime');
             $table->timestamps();

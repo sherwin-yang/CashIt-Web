@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\MoneyChangerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*
+|--------------------------------------------------------------------------
+| Mobile API's
+|--------------------------------------------------------------------------
+*/
+Route::post('/customerLogin', [AuthController::class, 'customerLogin']);
