@@ -7,25 +7,25 @@ use App\Models\Currency;
 
 class CurrencyController extends Controller
 {
-    function add(Request $req)
-    {
-        $currency= new currency;
-        $currency->name=$req->name;
-        $currency->buyPrice=$req->buyPrice;
-        $currency->sellPrice=$req->sellPrice;
-        $result=$currency->save();
+    public function addNewCurrency(Request $request) {
+        $newCurrency = new Currency();
+        $newCurrency->name = $request->name;
+        $newCurrency->buyPrice = $request->buyPrice;
+        $newCurrency->sellPrice = $request->sellPrice;
+        $result = $newCurrency->save();
 
-        if ($result)
-        {
-            return["Result"=> "Data has been saved"];
+        if($result) {
+            return ["Result" => "Data has been saved"];
         }
-        else{
-            return["Result"=> "Operation Failed"];
+        else {
+            return ["Result" => "Failed saving new data"];
         }
-        
     }
-
-    function get(){
+  
+  function get(){
         return currency::all();
     }
+  
+    // public function editCurrency(Request $request) {}
+
 }

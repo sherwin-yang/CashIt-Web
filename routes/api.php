@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\money_changerController;
+use App\Http\Controllers\MoneyChangerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,6 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post("add",[CurrencyController::class,'add']);
-Route::get("get",[CurrencyController::class,'get']);
-Route::get("list/{id}",[money_changerController::class,'list']);
+/*
+|--------------------------------------------------------------------------
+| Mobile API's
+|--------------------------------------------------------------------------
+*/
+Route::post('/customerLogin', [AuthController::class, 'customerLogin']);
