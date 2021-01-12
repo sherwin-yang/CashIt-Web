@@ -17,7 +17,9 @@
 <body>
     <header>
         <div class="float-end">
-            <button type="button" class="btn btn-danger log-out">Keluar</button>
+            <a href="/logout">
+                <button type="button" class="btn btn-danger log-out">Keluar</button>
+            </a>
         </div>
         <div class="row">
             <div class="col-2 photo-status">

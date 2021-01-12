@@ -4,6 +4,8 @@
 
 @section('appointment')
 
+    <h1>Hello, {{ session('user_id') }}</h1>
+
     <div class="appointment">
         <table class="table table-striped table-hover">
             <table class="table table-hover">
