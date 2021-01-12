@@ -21,7 +21,11 @@ class CurrencyController extends Controller
             return ["Result" => "Failed saving new data"];
         }
     }
-
+  
+  function get(){
+        return currency::all();
+    }
+  
     // public function editCurrency(Request $request) {}
 
 }
