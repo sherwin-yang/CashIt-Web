@@ -4,14 +4,15 @@
     <!-- Login Page -->
     <h1 class="register-login-title">Masuk</h1>
     <div class="form">
-        <form action="">
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
             <div class="row">
                 <div class="row">
                     <div class="col-6">
                         <label> Email : </label>
                     </div>
                     <div class="col-6">
-                        <input type="text" name="email" required />
+                        <input type="email" name="email" required />
                     </div>
                 </div>
                 <div class="row">

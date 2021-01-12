@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,22 +19,37 @@ Route::get('/', function () {
     return view('other-views/mc_welcome');
 });
 
-Route::get('/appointment', function () {
-    return view('main-view/mc_appointment');
-});
+/* Authentication */
+Route::get('/login', function () {
+    if(session()->has('user_id')) {
+        return redirect('appointment');
+    }
+    return view('other-views/mc_login');
+})->name('login');
+Route::post('/login', [AuthController::class, 'webUserLogin'])->name('login');
 
+Route::get('/register', function () {
+    if(session()->has('user_id')) {
+        return redirect('appointment');
+    }
+    return view('other-views/mc_register');
+});
+Route::post('/register', [AuthController::class, 'signUpNewMoneyChanger'])->name('register');
+
+Route::get('/logout', [AuthController::class, 'logOut']);
+
+/* Currency */
 Route::get('/currency', function () {
     return view('main-view/mc_currency');
 });
+Route::post('/addNewCurrency', [CurrencyController::class, 'addNewCurrency']);
 
-Route::get('/login', function () {
-    return view('other-views/mc_login');
-});
+/* Appointment */
+Route::get('/appointment', function () {
+    return view('main-view/mc_appointment');
+})->name('appointment');
 
-Route::get('/register', function () {
-    return view('other-views/mc_register');
-});
-
+/* Edit Profiel */
 Route::get('/editProfile', function () {
     return view('other-views/mc_edit_profile');
 });
