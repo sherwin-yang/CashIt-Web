@@ -11,7 +11,7 @@ class Currency extends Model
 
     public $table = 'currency';
 
-    public function currencyDetail() {
-        return $this->hasOne(CurrencyDetail::class);
+    public function currencyDetail(){
+        return $this->hasOne(CurrencyDetail::class,'currencyId');
     }
 }

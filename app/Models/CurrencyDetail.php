@@ -12,10 +12,10 @@ class CurrencyDetail extends Model
     public $table = 'currency_detail';
 
     public function moneyChanger() {
-        return $this->belongsTo(MoneyChanger::class);
+        return $this->belongsTo(MoneyChanger::class,'moneyChangerId');
     }
 
     public function currency() {
-        return $this->belongsTo(Currency::class);
+        return $this->belongsTo(Currency::class,'currencyId');
     }
 }

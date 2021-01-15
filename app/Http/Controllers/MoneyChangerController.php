@@ -7,9 +7,18 @@ use App\Models\MoneyChanger;
 
 class MoneyChangerController extends Controller
 {
-    function list()
+  
+    function getMCData()
     {
         $session = session()->get('user_id');
-        return $session;
+        $MoneyChanger = MoneyChanger::find($session);
+        return view('main-view.layout.mc_main', ['MoneyChanger' => $MoneyChanger]);
     }
+
+    function getMCCurrency()
+    {
+        $session = session()->get('user_id');
+        return MoneyChanger::find($session)->currencyDetail;
+    }
+
 }
