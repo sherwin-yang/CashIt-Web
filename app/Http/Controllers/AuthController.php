@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\MoneyChanger;
 use App\Models\OfficeHour;
 use App\Models\OfficeHourDetail;
-use Brick\Math\BigInteger;
 
 class AuthController extends Controller
 {
@@ -26,11 +25,6 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('my-app-token')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
 
         $request->session()->put('user_id', $user['id']);
 
@@ -54,63 +48,63 @@ class AuthController extends Controller
             'phoneNumber' => 'required|min:8|max:10'
         ]);
 
-        $moneyChanger = $this->saveMoneyChangerData($request);
-        $this->saveOfficeHourData($request, $moneyChanger);
+        $this->saveMoneyChangerData($request);
 
+        echo '<script language="javascript"> alert("Registrasi Berhasil!") </script>';
         return view('other-views.mc_login');
     }
 
     public function saveMoneyChangerData(Request $request) {
         $newMoneyChanger = new MoneyChanger();
-        $newMoneyChanger->name = $request->name;
+        $newMoneyChanger->moneyChangerName = $request->name;
         $newMoneyChanger->email = $request->email;
         $newMoneyChanger->password = Hash::make($request->password);
         $newMoneyChanger->photo = base64_encode($request->photo);
         $newMoneyChanger->address = $request->address;
         $newMoneyChanger->whatsAppLink = "https://wa.me/".$request->whatsAppNumber;
         $newMoneyChanger->phoneNumber = $request->phoneNumber;
-        $newMoneyChanger->activationStatus = "active";
+        $newMoneyChanger->isActivated = false;
         $newMoneyChanger->save();
-        return $newMoneyChanger;
+        $this->saveOfficeHourData($request, $newMoneyChanger->id);
     }
 
-    public function saveOfficeHourData(Request $request, MoneyChanger $moneyChanger) {
+    public function saveOfficeHourData(Request $request, Int $moneyChangerId) {
         $mondayOfficeHour = new OfficeHour();
         $mondayOfficeHour->day = 'Monday';
         $mondayOfficeHour->openTime = $request->seninOpen;
         $mondayOfficeHour->closeTime = $request->seninClose;
         $mondayOfficeHour->save();
-        $this->saveOfficeHourDetailData($moneyChanger, $mondayOfficeHour);
+        $this->saveOfficeHourDetailData($moneyChangerId, $mondayOfficeHour->id);
         $tuesdayOfficeHour = new OfficeHour();
         $tuesdayOfficeHour->day = 'Tuesday';
         $tuesdayOfficeHour->openTime = $request->selasaOpen;
         $tuesdayOfficeHour->closeTime = $request->selasaClose;
         $tuesdayOfficeHour->save();
-        $this->saveOfficeHourDetailData($moneyChanger, $tuesdayOfficeHour);
+        $this->saveOfficeHourDetailData($moneyChangerId, $tuesdayOfficeHour->id);
         $wednesdayOfficeHour = new OfficeHour();
         $wednesdayOfficeHour->day = 'Wednesday';
         $wednesdayOfficeHour->openTime = $request->rabuOpen;
         $wednesdayOfficeHour->closeTime = $request->rabuClose;
         $wednesdayOfficeHour->save();
-        $this->saveOfficeHourDetailData($moneyChanger, $wednesdayOfficeHour);
+        $this->saveOfficeHourDetailData($moneyChangerId, $wednesdayOfficeHour->id);
         $thursdayOfficeHour = new OfficeHour();
         $thursdayOfficeHour->day = 'Thursday';
         $thursdayOfficeHour->openTime = $request->kamisOpen;
         $thursdayOfficeHour->closeTime = $request->kamisClose;
         $thursdayOfficeHour->save();
-        $this->saveOfficeHourDetailData($moneyChanger, $thursdayOfficeHour);
+        $this->saveOfficeHourDetailData($moneyChangerId, $thursdayOfficeHour->id);
         $fridayOfficeHour = new OfficeHour();
         $fridayOfficeHour->day = 'Friday';
         $fridayOfficeHour->openTime = $request->jumatOpen;
         $fridayOfficeHour->closeTime = $request->jumatClose;
         $fridayOfficeHour->save();
-        $this->saveOfficeHourDetailData($moneyChanger, $fridayOfficeHour);
+        $this->saveOfficeHourDetailData($moneyChangerId, $fridayOfficeHour->id);
     }
 
-    public function saveOfficeHourDetailData(MoneyChanger $moneyChanger, OfficeHour $officeHour) {
+    public function saveOfficeHourDetailData(Int $moneyChangerId, Int $officeHourId) {
         $newOfficeHourDetail = new OfficeHourDetail();
-        $newOfficeHourDetail->officeHourId = $officeHour->id;
-        $newOfficeHourDetail->moneyChangerId = $moneyChanger->id;
+        $newOfficeHourDetail->officeHourId = $officeHourId;
+        $newOfficeHourDetail->moneyChangerId = $moneyChangerId;
         $newOfficeHourDetail->save();
     }
 
@@ -181,11 +175,24 @@ class AuthController extends Controller
         $token = $user->createToken('my-app-token')->plainTextToken;
 
         $response = [
-            'user' => $user,
-            'token' => $token
+            'user' => $user
         ];
 
-        return response($response, 201);
+        return response($response);
+    }
+
+    public function registerNewCustomer(Request $request) {
+        $newUser = new User();
+        $newUser->userName = $request->name;
+        $newUser->email = $request->email;
+        $newUser->password = Hash::make($request->password);
+        $newUser->save();
+
+        $response = [
+            'user' => $newUser
+        ];
+
+        return response($response);
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MoneyChangerController;
@@ -19,10 +20,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if(session()->has('user_id')) {
+        return redirect('appointment');
+    }
     return view('other-views/mc_welcome');
 });
 
-/* Authentication */
+/*
+---------- Authentication ----------
+*/
 Route::get('/login', function () {
     if(session()->has('user_id')) {
         return redirect('currency');
@@ -42,18 +48,31 @@ Route::post('/register', [AuthController::class, 'signUpNewMoneyChanger'])->name
 
 Route::get('/logout', [AuthController::class, 'logOut']);
 
-/* Currency */
+
+---------- Currency View ----------
+*/
 Route::resource('/currency', CurrencyController::class);
 Route::post('/currencyUpdate','CurrencyController@update');
-Route::post('/addNewCurrency', [CurrencyController::class, 'addNewCurrency']);
+Route::get('/currency', function () {
+    if(!session()->has('user_id')) {
+        return redirect('login');
+    }
+    return view('main-view/mc_currency');
+})->name('currency');
+Route::post('/currency', [CurrencyController::class, 'addNewCurrency'])->name('addNewCurrency');
 
-/* Appointment */
-Route::get('/appointment', function () {
-    return view('main-view/mc_appointment');
-})->name('appointment');
+/*
+---------- Appointment View ----------
+*/
+Route::get('/appointment', [AppointmentController::class, 'getListOfAppointmentByMoneyChangerId'])->name('appointment');
 
-/* Edit Profiel */
+/*
+---------- Edit Profiel View ----------
+*/
 Route::get('/editProfile', function () {
+    if(!session()->has('user_id')) {
+        return redirect('login');
+    }
     return view('other-views/mc_edit_profile');
 });
 

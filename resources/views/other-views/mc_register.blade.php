@@ -1,7 +1,7 @@
 @extends('other-views/layout/template')
 
 @section('register')
-    <h1 class="register-login-title">Daftar</h1>
+    {{-- <h1 class="register-login-title">Daftar</h1> --}}
     <div class="form">
         <form action="{{ route('register') }}" method="POST">
             @csrf

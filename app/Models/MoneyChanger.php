@@ -19,4 +19,8 @@ class MoneyChanger extends Model
     public function currencyDetail(){
         return $this->hasMany(CurrencyDetail::class,'moneyChangerId');
     }
+
+    public function currencyDetail() {
+        return $this->hasMany(CurrencyDetail::class);
+    }
 }

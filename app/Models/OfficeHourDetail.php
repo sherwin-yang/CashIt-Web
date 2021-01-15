@@ -11,15 +11,12 @@ class OfficeHourDetail extends Model
 
     public $table = 'office_hour_detail';
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function moneyChanger() {
+        return $this->belongsTo(MoneyChanger::class);
     }
 
     public function officeHour() {
         return $this->belongsTo(OfficeHour::class);
     }
 
-    public function moneyChanger() {
-        return $this->belongsTo(MoneyChanger::class);
-    }
 }

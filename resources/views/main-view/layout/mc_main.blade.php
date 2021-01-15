@@ -16,17 +16,16 @@
 
 <body>
     <header>
-        <form action="{{route('header')}}"method="GET">
-            <div class="float-end">
-                <a href="/logout">
-                    <button type="button" class="btn btn-danger log-out">Keluar</button>
-                </a>
+        <div class="float-end">
+            <a href="/logout">
+                <button type="button" class="btn btn-danger log-out">Keluar</button>
+            </a>
+        </div>
+        <div class="row">
+          <div class="col-2 photo-status">
+            <div class="photo"></div>
+              {{-- <span class="status">Status</span> --}}
             </div>
-            <div class="row">
-                <div class="col-2 photo-status">
-                    <div class="photo"></div>
-                    <span class="status">Status</span>
-                </div>
                 <div class="col-7 info">
                     <span class="fs-1">{{$MoneyChanger->name ?? 'Ganteng Doang'}}</span>
                     <span>{{$MoneyChanger->address ?? 'jalan mulu jadian kaga'}}</span>
@@ -37,8 +36,6 @@
                     <span>WhatsApp : {{$MoneyChanger->whatsAppLink ?? '08213214245'}}</span>
                 </div>
             </div>
-        </form>
-
     </header>
 
     <div class="main">
@@ -48,13 +45,13 @@
                     <li class="col-6">
                         <a href="/currency">
                             <i class="far fa-money-bill-alt fa-2x"></i>
-                            <span>Currencies</span>
+                            <span>Valuta</span>
                         </a>
                     </li>
                     <li class="col-6">
                         <a href="/appointment">
                             <i class="far fa-clock fa-2x"></i>
-                            <span>Appointments</span>
+                            <span>Jadwal Pertemuan</span>
                         </a>
                     </li>
                 </ul>

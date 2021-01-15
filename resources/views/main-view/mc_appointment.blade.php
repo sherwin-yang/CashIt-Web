@@ -4,8 +4,6 @@
 
 @section('appointment')
 
-    <h1>Hello, {{ session('user_id') }}</h1>
-
     <div class="appointment">
         <table class="table table-striped table-hover">
             <table class="table table-hover">
@@ -19,15 +17,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <button class="btn btn-danger" data-modal-target="#finishTransaction">Selesaikan</button>
-                        </td>
-                    </tr>
+                    @foreach ($appointments as $appointment)
+                        <tr>
+                            <th scope="row">{{ $appointment->orderNumber }}</th>
+                            <td>{{ $appointment->userName }}</td>
+                            <td>{{ $appointment->time }}</td>
+                            <td>{{ $appointment->toExchangeAmount }}</td>
+                            <td>
+                                <button class="btn btn-danger" data-modal-target="#finishTransaction">Selesaikan</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </table>
@@ -37,13 +37,15 @@
         <div class="header d-flex flex-row-reverse bd-highlight">
             <button close-button class="close-button">&times;</button>
         </div>
-        <div class="content d-flex justify-content-center">
-            <p class="message">Apakah transaksi ini ingin diselesaikan?</p>
-            <div class="action-button">
-                <button class="btn btn-danger">Selesaikan</button>
-                <button close-button class="btn btn-dark">Tidak, lanjutkan</button>
+        <form action="">
+            <div class="content d-flex justify-content-center">
+                <p class="message">Apakah transaksi ini ingin diselesaikan?</p>
+                <div class="action-button">
+                    <button class="btn btn-danger">Selesaikan</button>
+                    <button close-button class="btn btn-dark">Tidak, lanjutkan</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <div id="overlay"></div>

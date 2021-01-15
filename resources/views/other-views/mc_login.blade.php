@@ -2,7 +2,7 @@
 
 @section('login')
     <!-- Login Page -->
-    <h1 class="register-login-title">Masuk</h1>
+    {{-- <h1 class="register-login-title">Masuk</h1> --}}
     <div class="form">
         <form action="{{ route('login') }}" method="POST">
             @csrf

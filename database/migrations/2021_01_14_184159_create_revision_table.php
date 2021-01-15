@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewDetailTable extends Migration
+class CreateRevisionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateReviewDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_detail', function (Blueprint $table) {
+        Schema::create('revision', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('userId')->unsigned();
-            $table->foreign('userId')->references('id')->on('user')->onDelete('cascade');
-            $table->bigInteger('reviewId')->unsigned();
-            $table->foreign('reviewId')->references('id')->on('review')->onDelete('cascade');
             $table->bigInteger('moneyChangerId')->unsigned();
             $table->foreign('moneyChangerId')->references('id')->on('money_changer')->onDelete('cascade');
+            $table->bigInteger('adminId')->unsigned();
+            $table->foreign('adminId')->references('id')->on('admin')->onDelete('cascade');
+            $table->string('revisionNote');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateReviewDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('review_detail');
+        Schema::dropIfExists('revision');
     }
 }

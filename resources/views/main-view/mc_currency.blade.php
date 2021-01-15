@@ -6,7 +6,6 @@
 
     <div class="currency">
         <button type="button" class="btn btn-primary" data-modal-target="#addCurrency">+ Add Currency</button>
-
         <table class="table table-striped table-hover">
             <table class="table table-hover">
                 <thead>
@@ -42,6 +41,7 @@
         </div>
         <div class="content d-flex justify-content-center">
             <form method="post" action="{{ route('currency.store')}}">
+            <form action="{{ route('addNewCurrency') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="row d-flex justify-content-center">
@@ -49,7 +49,7 @@
                             <span>Mata Uang</span>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" aria-describedby="passwordHelpInline">
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -57,7 +57,7 @@
                             <span>Harga Jual(Rp.)</span>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" aria-describedby="passwordHelpInline">
+                            <input type="text" name="buyPrice" class="form-control" required>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -65,15 +65,15 @@
                             <span>Harga Beli(Rp.)</span>
                         </div>
                         <div class="col-7">
-                            <input type="text" class="form-control" aria-describedby="passwordHelpInline">
+                            <input type="text" name="sellPrice" class="form-control" required>
                         </div>
                     </div>
                 </div>
+                <div class="action-button">
+                    <button close-button class="btn btn-outline-danger">Batal</button>
+                    <button class="btn btn-success" name="button" value="tambahkan">Tambahkan</button>
+                </div>
             </form>
-            <div class="action-button">
-                <button class="btn btn-danger">Hapus</button>
-                <button class="btn btn-success">Tambahkan</button>
-            </div>
         </div>
     </div>
 
@@ -118,6 +118,7 @@
                         <button type="submit" class="btn btn-success">Ubah</button>
                     </div>
                 </form>
+            </form>
         </div>
     </div>
 

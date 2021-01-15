@@ -7,6 +7,7 @@ use App\Models\MoneyChanger;
 
 class MoneyChangerController extends Controller
 {
+  
     function getMCData()
     {
         $session = session()->get('user_id');

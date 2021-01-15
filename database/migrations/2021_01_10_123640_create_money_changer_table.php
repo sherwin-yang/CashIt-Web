@@ -15,7 +15,7 @@ class CreateMoneyChangerTable extends Migration
     {
         Schema::create('money_changer', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('moneyChangerName');
             $table->string('password');
             $table->string('email')->unique();
             $table->binary('photo');
@@ -24,7 +24,7 @@ class CreateMoneyChangerTable extends Migration
             $table->string('phoneNumber');
             $table->string('latitudeCoordinate')->nullable();
             $table->string('longitudeCoordinate')->nullable();
-            $table->string('activationStatus');
+            $table->boolean('isActivated');
             $table->rememberToken();
             $table->timestamps();
         });
