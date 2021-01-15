@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-2 photo-status">
                 <div class="photo"></div>
-                <span class="status">Status</span>
+                {{-- <span class="status">Status</span> --}}
             </div>
             <div class="col-7 info">
                 <span class="fs-1">Money Changer Maju Roso</span>
@@ -45,13 +45,13 @@
                     <li class="col-6">
                         <a href="/currency">
                             <i class="far fa-money-bill-alt fa-2x"></i>
-                            <span>Currencies</span>
+                            <span>Valuta</span>
                         </a>
                     </li>
                     <li class="col-6">
                         <a href="/appointment">
                             <i class="far fa-clock fa-2x"></i>
-                            <span>Appointments</span>
+                            <span>Jadwal Pertemuan</span>
                         </a>
                     </li>
                 </ul>

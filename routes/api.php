@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 | Mobile API's
 |--------------------------------------------------------------------------
 */
+
+/*
+---------- Authentication ----------
+*/
 Route::post('/customerLogin', [AuthController::class, 'customerLogin']);
+Route::post('/customerRegister', [AuthController::class, 'registerNewCustomer']);
+
+
+/*
+---------- Appointment ----------
+*/
+
+Route::post('/makeNewAppointment', [AppointmentController::class, 'makeNewAppointment']);

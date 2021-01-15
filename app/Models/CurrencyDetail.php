@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OfficeHourDetail extends Model
+class CurrencyDetail extends Model
 {
     use HasFactory;
 
-    public $table = 'office_hour_detail';
+    public $table = 'currency_detail';
 
     public function moneyChanger() {
         return $this->belongsTo(MoneyChanger::class);
     }
 
-    public function officeHour() {
-        return $this->belongsTo(OfficeHour::class);
+    public function currency() {
+        return $this->belongsTo(Currency::class);
     }
 }

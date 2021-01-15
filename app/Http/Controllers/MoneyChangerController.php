@@ -7,8 +7,9 @@ use App\Models\MoneyChanger;
 
 class MoneyChangerController extends Controller
 {
-    function list($id)
+    function list()
     {
-        return money_changer::find($id);
+        $session = session()->get('user_id');
+        return $session;
     }
 }

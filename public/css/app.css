@@ -42,11 +42,11 @@ header div .photo-status .photo {
     background-position: center;
     background-size: cover;
     border-radius: 100%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     border: 3px solid #e5e5e5;
 }
 
-header div .photo-status .status {
+/* header div .photo-status .status {
     width: fit-content;
     height: fit-content;
     font-size: 14px;
@@ -54,7 +54,7 @@ header div .photo-status .status {
     background-color: #00e676;
     border-radius: 20px;
     border: 2px solid #00a354;
-}
+} */
 
 header div .info div .log-out {
     width: fit-content;

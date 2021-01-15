@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Currency extends Model
 {
     use HasFactory;
-  
+
     public $table = 'currency';
+
+    public function currencyDetail() {
+        return $this->hasOne(CurrencyDetail::class);
+    }
 }

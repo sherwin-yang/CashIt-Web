@@ -15,4 +15,8 @@ class MoneyChanger extends Model
     public function officeHourDetail() {
         return $this->hasMany(OfficeHourDetail::class);
     }
+
+    public function currencyDetail() {
+        return $this->hasMany(CurrencyDetail::class);
+    }
 }
