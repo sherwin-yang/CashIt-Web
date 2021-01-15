@@ -19,4 +19,7 @@ class OfficeHourDetail extends Model
         return $this->belongsTo(OfficeHour::class);
     }
 
+    public function moneyChanger() {
+        return $this->belongsTo(MoneyChanger::class);
+    }
 }
