@@ -13,7 +13,11 @@ class MoneyChanger extends Model
     public $table = 'money_changer';
 
     public function officeHourDetail() {
-        return $this->hasMany(OfficeHourDetail::class);
+        return $this->hasMany(OfficeHourDetail::class,'moneyChangerId');
+    }
+
+    public function currencyDetail(){
+        return $this->hasMany(CurrencyDetail::class,'moneyChangerId');
     }
 
     public function currencyDetail() {

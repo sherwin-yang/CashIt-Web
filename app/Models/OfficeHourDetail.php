@@ -18,4 +18,5 @@ class OfficeHourDetail extends Model
     public function officeHour() {
         return $this->belongsTo(OfficeHour::class);
     }
+
 }

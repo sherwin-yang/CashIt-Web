@@ -3,6 +3,8 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\MoneyChangerController;
+use App\Http\Controllers\OfficeHourController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +31,7 @@ Route::get('/', function () {
 */
 Route::get('/login', function () {
     if(session()->has('user_id')) {
-        return redirect('appointment');
+        return redirect('currency');
     }
     return view('other-views/mc_login');
 })->name('login');
@@ -41,13 +43,16 @@ Route::get('/register', function () {
     }
     return view('other-views/mc_register');
 });
+
 Route::post('/register', [AuthController::class, 'signUpNewMoneyChanger'])->name('register');
 
 Route::get('/logout', [AuthController::class, 'logOut']);
 
-/*
+
 ---------- Currency View ----------
 */
+Route::resource('/currency', CurrencyController::class);
+Route::post('/currencyUpdate','CurrencyController@update');
 Route::get('/currency', function () {
     if(!session()->has('user_id')) {
         return redirect('login');
@@ -70,3 +75,8 @@ Route::get('/editProfile', function () {
     }
     return view('other-views/mc_edit_profile');
 });
+
+Route::get("/getMCCurrency",[MoneyChangerController::class,'getMCCurrency']);
+Route::get("/Header",[OfficeHourController::class,'getMCOfficeHour'])->name('header');
+Route::get("/OfficeHourList",[OfficeHourController::class,'getMCOfficeHour'])->name('header');
+Route::put("/updateCurrency",[CurrencyController::class,'updateCurrency']);
