@@ -20,7 +20,7 @@ class CreateMoneyChangerTable extends Migration
             $table->string('email')->unique();
             $table->binary('photo');
             $table->string('address');
-            $table->string('whatsAppLink');
+            $table->string('whatsAppNumber');
             $table->string('phoneNumber');
             $table->string('latitudeCoordinate')->nullable();
             $table->string('longitudeCoordinate')->nullable();

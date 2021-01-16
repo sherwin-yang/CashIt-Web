@@ -12,6 +12,6 @@ class OfficeHour extends Model
     public $table = 'office_hour';
 
     public function officeHourDetail() {
-        return $this->hasOne(OfficeHourDetail::class,'officeHourId');
+        return $this->hasOne(OfficeHourDetail::class);
     }
 }

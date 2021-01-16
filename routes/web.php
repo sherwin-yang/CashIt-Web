@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if(session()->has('user_id')) {
+    if(session()->has('user.id')) {
         return redirect('appointment');
     }
     return view('other-views/mc_welcome');
@@ -30,53 +30,42 @@ Route::get('/', function () {
 ---------- Authentication ----------
 */
 Route::get('/login', function () {
-    if(session()->has('user_id')) {
-        return redirect('currency');
+    if(session()->has('user.id')) {
+        return redirect('appointment');
     }
     return view('other-views/mc_login');
-})->name('login');
+});
 Route::post('/login', [AuthController::class, 'webUserLogin'])->name('login');
 
 Route::get('/register', function () {
-    if(session()->has('user_id')) {
+    if(session()->has('user.id')) {
         return redirect('appointment');
     }
     return view('other-views/mc_register');
 });
-
 Route::post('/register', [AuthController::class, 'signUpNewMoneyChanger'])->name('register');
 
 Route::get('/logout', [AuthController::class, 'logOut']);
 
-
+/*
 ---------- Currency View ----------
 */
-Route::resource('/currency', CurrencyController::class);
-Route::post('/currencyUpdate','CurrencyController@update');
-Route::get('/currency', function () {
-    if(!session()->has('user_id')) {
-        return redirect('login');
-    }
-    return view('main-view/mc_currency');
-})->name('currency');
+Route::get('/currency', [CurrencyController::class, 'showCurrencies'])->name('currency');
 Route::post('/currency', [CurrencyController::class, 'addNewCurrency'])->name('addNewCurrency');
+Route::post('/editCurrency', [CurrencyController::class, 'handleUbahButton'])->name('editCurrency');
 
 /*
 ---------- Appointment View ----------
 */
-Route::get('/appointment', [AppointmentController::class, 'getListOfAppointmentByMoneyChangerId'])->name('appointment');
+Route::get('/appointment', [AppointmentController::class, 'showAppointments'])->name('appointment');
+Route::post('/appointment', [AppointmentController::class, 'finishAppointment'])->name('finishAppointment');
 
 /*
 ---------- Edit Profiel View ----------
 */
 Route::get('/editProfile', function () {
-    if(!session()->has('user_id')) {
+    if(!session()->has('user.id')) {
         return redirect('login');
     }
     return view('other-views/mc_edit_profile');
 });
-
-Route::get("/getMCCurrency",[MoneyChangerController::class,'getMCCurrency']);
-Route::get("/Header",[OfficeHourController::class,'getMCOfficeHour'])->name('header');
-Route::get("/OfficeHourList",[OfficeHourController::class,'getMCOfficeHour'])->name('header');
-Route::put("/updateCurrency",[CurrencyController::class,'updateCurrency']);

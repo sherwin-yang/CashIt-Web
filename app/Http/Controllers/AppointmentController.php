@@ -6,24 +6,22 @@ use App\Models\AppointmentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Appointment;
-use Illuminate\Support\Facades\Date;
-use PhpParser\Node\Expr\Cast\Int_;
 
 class AppointmentController extends Controller
 {
 
-    public function getListOfAppointmentByMoneyChangerId() {
-        if(!session()->has('user_id')) {
+    public function showAppointments() {
+        if(!session()->has('user.id')) {
             return redirect('login');
         }
 
-        $appointments = $this->getListOfAppointmentDetailByMoneyChangerId();
+        $appointments = $this->getListOfAppointmenByMoneyChangerId();
 
         return view('main-view/mc_appointment', ['appointments'=>$appointments]);
     }
 
-    private function getListOfAppointmentDetailByMoneyChangerId() {
-        $moneyChangerId = session()->get('user_id');
+    private function getListOfAppointmenByMoneyChangerId() {
+        $moneyChangerId = session()->get('user.id');
         date_default_timezone_set('Asia/Jakarta');
         $todayDate = Date('y-m-d');
 
@@ -34,11 +32,22 @@ class AppointmentController extends Controller
         ->join('currency', 'currency_detail.id', '=', 'currency.id')
         ->join('money_changer', 'currency_detail.moneyChangerId', 'money_changer.id')
         ->select('appointment.*', 'user.userName', 'currency.currencyName')
+        ->where('appointment.status', 'ongoing')
         ->where('money_changer.id', $moneyChangerId)
         ->where('appointment.date', $todayDate)
         ->get();
 
         return $appointments;
+    }
+
+    public function finishAppointment(Request $request) {
+        if($request->button == 'selesaikan') {
+            $appointment = Appointment::find($request->appointmentId);
+            $appointment->status = 'completed';
+            $appointment->save();
+        }
+
+        return redirect()->route('appointment');
     }
 
     /*

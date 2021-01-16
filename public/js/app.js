@@ -34,3 +34,14 @@ function closeModal(modal) {
     modal.classList.remove("active");
     overlay.classList.remove("active");
 }
+
+function updateCurrency(currencyName, sellPrice, buyPrice, currencyId) {
+    document.getElementById("name").value = currencyName;
+    document.getElementById("sellPrice").value = sellPrice;
+    document.getElementById("buyPrice").value = buyPrice;
+    document.getElementById("currencyId").value = currencyId;
+}
+
+function finishTransaction(appointmentId) {
+    document.getElementById("appointmentId").value = appointmentId;
+}

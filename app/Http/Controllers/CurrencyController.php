@@ -4,114 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Currency;
-use App\Models\MoneyChanger;
 use App\Models\CurrencyDetail;
+use Illuminate\Support\Facades\DB;
 
 class CurrencyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function showCurrencies()
     {
-        $session = session()->get('user_id');
-        $index = MoneyChanger::find($session)->currencyDetail;
-        $currencyIndex = array();
-
-        foreach($index as $val){
-        $currency = Currency::find($val->currencyId);
-        $currencyIndex[] = $currency;
+        if(!session()->has('user.id')) {
+            return redirect('login');
         }
-        // return $currency;
-        return view('main-view.mc_currency',['currencyIndex' => $currencyIndex]);
+
+        $currencies = $this->getListOfCurrencyByMoneyChangerId();
+
+        return view('main-view.mc_currency', ['currencies'=>$currencies]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('currency');
+    public function test() {
+        return redirect()->route('currency');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $newCurrency = new Currency();
-        $newCurrency->name = $request->name;
-        $newCurrency->buyPrice = $request->buyPrice;
-        $newCurrency->sellPrice = $request->sellPrice;
-        $result = $newCurrency->save();
+    public function getListOfCurrencyByMoneyChangerId() {
+        $moneyChangerId = session()->get('user.id');
 
-        if($result) {
-            return redirect('/currency')->with('success', 'Currency saved!');
-        }
-        else {
-            return ["Result" => "Failed saving new data"];
-        }
-    }
+        $currencies = DB::table('currency')
+        ->join('currency_detail', 'currency_detail.currencyId', '=', 'currency.id')
+        ->join('money_changer', 'currency_detail.moneyChangerId', '=', 'money_changer.id')
+        ->select('currency.*')
+        ->where('money_changer.id', $moneyChangerId)
+        ->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $currency = Currency::find($id);
-        return $currency;
-        // return redirect('back',['currencyId' => $currency]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $req)
-    {
-        $idUpdate = $req->get("modalId");
-        $currency = Currency::find($idUpdate);
-        $currency->name = $req->get('name');
-        $currency->buyPrice = $req->get('buyPrice');
-        $currency->sellPrice = $req->get('sellPrice');
-        $currency->save();
-            return redirect()->back();
-            // return $currency;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $currencies;
     }
 
     public function addNewCurrency(Request $request) {
@@ -123,14 +46,15 @@ class CurrencyController extends Controller
                     $currency = $this->getCurrencyByCurrencyDetailId($data->currencyId);
                     if($request->name == $currency->currencyName) {
                         echo '<script language="javascript"> alert("Error! Valuta tidak dapat didaftarkan karena sudah tersedia. Silahkan melakukan perubahan pada valuta yang sudah terdaftar jika belum sesuai.") </script>';
-                        return view('main-view.mc_currency');
+                        return redirect()->route('currency');
                     }
                 }
             }
             // If $listOfCurrencyDetail empty and there is no same existing Currency, then add data to DB.
             $this->saveCurrencyData($request);
-            return view('main-view.mc_currency');
+            return redirect()->route('currency');
         }
+        return redirect()->route('currency');
     }
 
     private function saveCurrencyData(Request $request) {
@@ -144,13 +68,13 @@ class CurrencyController extends Controller
 
     private function saveCurrencyDetailData(Int $currencyId) {
         $newCurrencyDetail = new CurrencyDetail();
-        $newCurrencyDetail->moneyChangerId = session()->get('user_id');
+        $newCurrencyDetail->moneyChangerId = session()->get('user.id');
         $newCurrencyDetail->currencyId = $currencyId;
         $newCurrencyDetail->save();
     }
 
     private function getCurrencyDetailsByMoneyChangerId() {
-        $moneyChangerId = session()->get('user_id');
+        $moneyChangerId = session()->get('user.id');
         $arrayOfCurrencyDetail = CurrencyDetail::where('moneyChangerId', $moneyChangerId)->get();
 
         return $arrayOfCurrencyDetail;
@@ -161,4 +85,27 @@ class CurrencyController extends Controller
         return $currency;
     }
 
+    public function handleUbahButton(Request $request) {
+        if($request->button == 'ubah') {
+            $this->updateCurrency($request);
+        }
+        else if($request->button == 'hapus') {
+            $this->deleteCurrency($request);
+        }
+
+        return redirect()->route('currency');
+    }
+
+    private function updateCurrency(Request $request) {
+        $currency = Currency::find($request->currencyId);
+        $currency->currencyName = $request->name;
+        $currency->buyPrice = $request->buyPrice;
+        $currency->sellPrice = $request->sellPrice;
+        $currency->save();
+    }
+
+    private function deleteCurrency(Request $request) {
+        $currency = Currency::find($request->currencyId);
+        $currency->save();
+    }
 }

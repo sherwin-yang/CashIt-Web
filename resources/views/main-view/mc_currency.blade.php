@@ -18,16 +18,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($currencyIndex ?? ['nil','nil'] as $currencies )
-                    <tr>
-                        <th scope="row">{{$loop->index+1}}</th>
-                        <td>{{$currencies->name ?? 'nil'}}</td>
-                        <td>{{$currencies->sellPrice ?? 'nil'}}</td>
-                        <td>{{$currencies->buyPrice ?? 'nil'}}</td>
-                        <td>
-                                <button class="btn btn-outline-primary" onclick="update('{{$currencies->name}}','{{$currencies->sellPrice}}','{{$currencies->buyPrice}}','{{$currencies->id}}')" data-modal-target="#editCurrency">Ubah</button>
-                        </td>
-                    </tr>
+                    @foreach ($currencies as $currency)
+                        <tr>
+                            <th scope="row">{{ $loop->index + 1 }}</th>
+                            <td>{{ $currency->currencyName }}</td>
+                            <td>{{ $currency->sellPrice }}</td>
+                            <td>{{ $currency->buyPrice }}</td>
+                            <td>
+                                <button class="btn btn-outline-primary"
+                                    onclick="updateCurrency('{{ $currency->currencyName }}','{{ $currency->sellPrice }}','{{ $currency->buyPrice }}','{{ $currency->id }}')"
+                                    data-modal-target="#editCurrency">Ubah
+                                </button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -40,7 +43,6 @@
             <button close-button class="close-button">&times;</button>
         </div>
         <div class="content d-flex justify-content-center">
-            <form method="post" action="{{ route('currency.store')}}">
             <form action="{{ route('addNewCurrency') }}" method="POST">
                 @csrf
                 <div class="row">
@@ -83,56 +85,46 @@
             <button close-button class="close-button">&times;</button>
         </div>
         <div class="content d-flex justify-content-center">
-                <form action="{{ route('currency.update',$currencies->id) }}" method="post">
-                    @method('PATCH')
-                    @csrf
-                    <div class="row">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-4">
-                                <span>Mata Uang</span>
-                            </div>
-                            <div class="col-7">
-                                <input type="text" id="name" name="name" class="form-control" aria-describedby="passwordHelpInline" value={{$currencies->name ?? ''}}>
-                            </div>
+            <form action="{{ route('editCurrency') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <span>Mata Uang</span>
                         </div>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-4">
-                                <span>Harga Jual(Rp.)</span>
-                            </div>
-                            <div class="col-7">
-                                <input type="text" id="sellPrice" name="sellPrice" class="form-control" aria-describedby="passwordHelpInline" value={{$currencies->sellPrice ?? ''}}>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-4">
-                                <span>Harga Beli(Rp.)</span>
-                            </div>
-                            <div class="col-7">
-                                <input type="text" id ="buyPrice" name ="buyPrice" class="form-control" aria-describedby="passwordHelpInline" value={{$currencies->buyPrice ?? ''}}>
-                            </div>
+                        <div class="col-7">
+                            <input type="text" id="name" name="name" class="form-control"
+                                aria-describedby="passwordHelpInline">
                         </div>
                     </div>
-                    <input type="hidden" id ="modalId" name="modalId">
-                    <div class="action-button">
-                        <button close-button class="btn btn-outline-danger">Batal</button>
-                        <button type="submit" class="btn btn-success">Ubah</button>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <span>Harga Jual(Rp.)</span>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" id="sellPrice" name="sellPrice" class="form-control"
+                                aria-describedby="passwordHelpInline">
+                        </div>
                     </div>
-                </form>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <span>Harga Beli(Rp.)</span>
+                        </div>
+                        <div class="col-7">
+                            <input type="text" id="buyPrice" name="buyPrice" class="form-control"
+                                aria-describedby="passwordHelpInline">
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="currencyId" name="currencyId">
+                <div class="action-button">
+                    <button name="button" value="hapus" class="btn btn-danger">Hapus</button>
+                    <button name="button" value="ubah" class="btn btn-success">Ubah</button>
+                </div>
+            </form>
             </form>
         </div>
     </div>
 
     <div id="overlay"></div>
-
-    <script>
-        function update(v,x,y,z){
-                document.getElementById("name").value = v;
-                document.getElementById("sellPrice").value = x;
-                document.getElementById("buyPrice").value = y;
-                document.getElementById("modalId").value = z;
-                return false;
-            }
-    </script>
-
 @endsection
-

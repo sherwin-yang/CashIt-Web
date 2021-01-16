@@ -24,7 +24,8 @@
                             <td>{{ $appointment->time }}</td>
                             <td>{{ $appointment->toExchangeAmount }}</td>
                             <td>
-                                <button class="btn btn-danger" data-modal-target="#finishTransaction">Selesaikan</button>
+                                <button class="btn btn-danger" onclick="finishTransaction('{{ $appointment->id }}')"
+                                    data-modal-target="#finishTransaction">Selesaikan</button>
                             </td>
                         </tr>
                     @endforeach
@@ -33,15 +34,18 @@
         </table>
     </div>
 
+    {{-- Finish Appointment --}}
     <div class="myModal" id="finishTransaction">
         <div class="header d-flex flex-row-reverse bd-highlight">
             <button close-button class="close-button">&times;</button>
         </div>
-        <form action="">
+        <form action="{{ route('finishAppointment') }}" method="POST">
+            @csrf
             <div class="content d-flex justify-content-center">
                 <p class="message">Apakah transaksi ini ingin diselesaikan?</p>
+                <input type="hidden" id="appointmentId" name="appointmentId">
                 <div class="action-button">
-                    <button class="btn btn-danger">Selesaikan</button>
+                    <button name="button" value="selesaikan" class="btn btn-danger">Selesaikan</button>
                     <button close-button class="btn btn-dark">Tidak, lanjutkan</button>
                 </div>
             </div>

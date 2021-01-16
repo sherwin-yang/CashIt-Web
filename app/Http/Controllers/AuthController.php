@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\MoneyChanger;
 use App\Models\OfficeHour;
 use App\Models\OfficeHourDetail;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -19,21 +20,45 @@ class AuthController extends Controller
 
     public function webUserLogin(Request $request) {
         $user = MoneyChanger::where('email', $request->email)->first();
+        $officeHour = $this->getOfficeHour($user->id);
 
         if(!$user || !Hash::check($request->password, $user->password)) {
             return view('other-views.mc_login');
         }
 
-        $token = $user->createToken('my-app-token')->plainTextToken;
-
-        $request->session()->put('user_id', $user['id']);
+        $request->session()->put('user', $user);
+        $request->session()->put('officeHour', $officeHour);
 
         return redirect()->route('appointment');
     }
 
+    private function getOfficeHour(Int $moneyChangerId) {
+        date_default_timezone_set('Asia/Jakarta');
+        $todayDate = Date('y-m-d');
+        $day = date("l", strtotime($todayDate));
+        // $day = date("l", strtotime('2021-01-15'));
+
+        $officeHour = DB::table('office_hour')
+        ->join('office_hour_detail', 'office_hour.id', '=', 'office_hour_detail.officeHourId')
+        ->join('money_changer', 'office_hour_detail.moneyChangerId', '=', 'money_changer.id')
+        ->where('money_changer.id', $moneyChangerId)
+        ->where('office_hour.day', $day)
+        ->select('office_hour.openTime', 'office_hour.closeTime')
+        ->get();
+
+        if(count($officeHour) == 0) {
+            $officeHour = 'Tutup';
+            return $officeHour;
+        }
+        else {
+            $time_OpenClose = $officeHour->openTime.'-'.$officeHour->closeTime;
+            return $time_OpenClose;
+        }
+    }
+
     public function logOut() {
-        if(session()->has('user_id')) {
-            session()->pull('user_id');
+        if(session()->has('user')) {
+            session()->pull('user');
         }
         return redirect('login');
     }
@@ -54,21 +79,21 @@ class AuthController extends Controller
         return view('other-views.mc_login');
     }
 
-    public function saveMoneyChangerData(Request $request) {
+    private function saveMoneyChangerData(Request $request) {
         $newMoneyChanger = new MoneyChanger();
         $newMoneyChanger->moneyChangerName = $request->name;
         $newMoneyChanger->email = $request->email;
         $newMoneyChanger->password = Hash::make($request->password);
         $newMoneyChanger->photo = base64_encode($request->photo);
         $newMoneyChanger->address = $request->address;
-        $newMoneyChanger->whatsAppLink = "https://wa.me/".$request->whatsAppNumber;
+        $newMoneyChanger->whatsAppNumber = $request->whatsAppNumber;
         $newMoneyChanger->phoneNumber = $request->phoneNumber;
         $newMoneyChanger->isActivated = false;
         $newMoneyChanger->save();
         $this->saveOfficeHourData($request, $newMoneyChanger->id);
     }
 
-    public function saveOfficeHourData(Request $request, Int $moneyChangerId) {
+    private function saveOfficeHourData(Request $request, Int $moneyChangerId) {
         $mondayOfficeHour = new OfficeHour();
         $mondayOfficeHour->day = 'Monday';
         $mondayOfficeHour->openTime = $request->seninOpen;
@@ -101,7 +126,7 @@ class AuthController extends Controller
         $this->saveOfficeHourDetailData($moneyChangerId, $fridayOfficeHour->id);
     }
 
-    public function saveOfficeHourDetailData(Int $moneyChangerId, Int $officeHourId) {
+    private function saveOfficeHourDetailData(Int $moneyChangerId, Int $officeHourId) {
         $newOfficeHourDetail = new OfficeHourDetail();
         $newOfficeHourDetail->officeHourId = $officeHourId;
         $newOfficeHourDetail->moneyChangerId = $moneyChangerId;

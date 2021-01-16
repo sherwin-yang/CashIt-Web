@@ -74,18 +74,24 @@ header div .info div .log-out {
     margin: 10px 0;
 }
 
-.navigation nav ul li {
-    text-align: center;
-    padding: 10px 0;
+.navigation nav {
+    display: flex;
+    justify-content: center;
 }
 
-.navigation nav ul li:hover {
+.navigation nav li {
+    text-align: center;
+    padding: 10px 0;
+    width: 45%;
+}
+
+.navigation nav li:hover {
     cursor: pointer;
     padding: 10px 0 7px 0;
     border-bottom: 3px solid #6610f2;
 }
 
-.navigation nav ul li a {
+.navigation nav li a {
     display: flex;
     flex-direction: column;
     justify-content: center;

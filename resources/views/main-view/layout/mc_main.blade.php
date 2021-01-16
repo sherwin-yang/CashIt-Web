@@ -22,39 +22,38 @@
             </a>
         </div>
         <div class="row">
-          <div class="col-2 photo-status">
-            <div class="photo"></div>
-              {{-- <span class="status">Status</span> --}}
+            <div class="col-2 photo-status">
+                <div class="photo"></div>
+                {{-- <span class="status">Status</span> --}}
             </div>
-                <div class="col-7 info">
-                    <span class="fs-1">{{$MoneyChanger->name ?? 'Ganteng Doang'}}</span>
-                    <span>{{$MoneyChanger->address ?? 'jalan mulu jadian kaga'}}</span>
-                    <span>{{$officeHourList->openTime ?? 0}}-{{$officeHourList->closeTime ?? 0}}</span>
-                </div>
-                <div class="col-3 info">
-                    <span>Telepon Rumah : {{$MoneyChanger->phoneNumber ?? '08213214245'}}</span>
-                    <span>WhatsApp : {{$MoneyChanger->whatsAppLink ?? '08213214245'}}</span>
-                </div>
+            <div class="col-7 info">
+                <span class="fs-1">{{ session()->get('user.moneyChangerName') }}</span>
+                <span>{{ session()->get('user.address') }}</span>
+                <span>{{ session()->get('officeHour') }}</span>
+                <span></span>
             </div>
+            <div class="col-3 info">
+                <span>Telepon Rumah : {{ session()->get('user.phoneNumber') }}</span>
+                <span>WhatsApp : {{ session()->get('user.whatsAppNumber') }}</span>
+            </div>
+        </div>
     </header>
 
     <div class="main">
         <div class="navigation">
-            <nav>
-                <ul class="row">
-                    <li class="col-6">
-                        <a href="/currency">
-                            <i class="far fa-money-bill-alt fa-2x"></i>
-                            <span>Valuta</span>
-                        </a>
-                    </li>
-                    <li class="col-6">
-                        <a href="/appointment">
-                            <i class="far fa-clock fa-2x"></i>
-                            <span>Jadwal Pertemuan</span>
-                        </a>
-                    </li>
-                </ul>
+            <nav class="row">
+                <li class="col-6">
+                    <a href="/currency">
+                        <i class="far fa-money-bill-alt fa-2x"></i>
+                        <span>Valuta</span>
+                    </a>
+                </li>
+                <li class="col-6">
+                    <a href="/appointment">
+                        <i class="far fa-clock fa-2x"></i>
+                        <span>Jadwal Pertemuan</span>
+                    </a>
+                </li>
             </nav>
         </div>
 
