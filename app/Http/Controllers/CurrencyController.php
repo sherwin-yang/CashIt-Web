@@ -54,7 +54,6 @@ class CurrencyController extends Controller
             $this->saveCurrencyData($request);
             return redirect()->route('currency');
         }
-        return redirect()->route('currency');
     }
 
     private function saveCurrencyData(Request $request) {
@@ -106,6 +105,6 @@ class CurrencyController extends Controller
 
     private function deleteCurrency(Request $request) {
         $currency = Currency::find($request->currencyId);
-        $currency->save();
+        $currency->delete();
     }
 }

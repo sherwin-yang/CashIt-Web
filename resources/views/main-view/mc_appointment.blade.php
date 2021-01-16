@@ -12,7 +12,7 @@
                         <th scope="col">Kode Antrian</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Waktu</th>
-                        <th scope="col">Jumlah Penukaran</th>
+                        <th scope="col">Penukaran</th>
                         <th scope="col">Tindakan</th>
                     </tr>
                 </thead>
@@ -22,7 +22,8 @@
                             <th scope="row">{{ $appointment->orderNumber }}</th>
                             <td>{{ $appointment->userName }}</td>
                             <td>{{ $appointment->time }}</td>
-                            <td>{{ $appointment->toExchangeAmount }}</td>
+                            <td>{{ $appointment->toExchangeCurrencyName . $appointment->toExchangeAmount . ' ke ' . $appointment->currencyName }}
+                            </td>
                             <td>
                                 <button class="btn btn-danger" onclick="finishTransaction('{{ $appointment->id }}')"
                                     data-modal-target="#finishTransaction">Selesaikan</button>

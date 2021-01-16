@@ -30,7 +30,6 @@
                 <span class="fs-1">{{ session()->get('user.moneyChangerName') }}</span>
                 <span>{{ session()->get('user.address') }}</span>
                 <span>{{ session()->get('officeHour') }}</span>
-                <span></span>
             </div>
             <div class="col-3 info">
                 <span>Telepon Rumah : {{ session()->get('user.phoneNumber') }}</span>

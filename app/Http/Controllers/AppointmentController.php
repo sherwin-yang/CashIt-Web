@@ -31,7 +31,7 @@ class AppointmentController extends Controller
         ->join('currency_detail', 'appointment_detail.toReceiveCurrencyDetailId', '=', 'currency_detail.id')
         ->join('currency', 'currency_detail.id', '=', 'currency.id')
         ->join('money_changer', 'currency_detail.moneyChangerId', 'money_changer.id')
-        ->select('appointment.*', 'user.userName', 'currency.currencyName')
+        ->select('appointment.*', 'appointment_detail.toExchangeCurrencyName', 'user.userName', 'currency.currencyName')
         ->where('appointment.status', 'ongoing')
         ->where('money_changer.id', $moneyChangerId)
         ->where('appointment.date', $todayDate)

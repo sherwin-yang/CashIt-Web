@@ -35,8 +35,8 @@ class AuthController extends Controller
     private function getOfficeHour(Int $moneyChangerId) {
         date_default_timezone_set('Asia/Jakarta');
         $todayDate = Date('y-m-d');
-        $day = date("l", strtotime($todayDate));
-        // $day = date("l", strtotime('2021-01-15'));
+        // $day = date("l", strtotime($todayDate));
+        $day = date("l", strtotime('2021-01-15'));
 
         $officeHour = DB::table('office_hour')
         ->join('office_hour_detail', 'office_hour.id', '=', 'office_hour_detail.officeHourId')
@@ -50,10 +50,8 @@ class AuthController extends Controller
             $officeHour = 'Tutup';
             return $officeHour;
         }
-        else {
-            $time_OpenClose = $officeHour->openTime.'-'.$officeHour->closeTime;
-            return $time_OpenClose;
-        }
+
+        return $officeHour;
     }
 
     public function logOut() {
