@@ -29,7 +29,7 @@
             <div class="col-7 info">
                 <span class="fs-1">{{ session()->get('user.moneyChangerName') }}</span>
                 <span>{{ session()->get('user.address') }}</span>
-                <span>{{ session()->get('officeHour') }}</span>
+                <span>{{ session()->get('openTime') . ' - ' . session()->get('closeTime') }}</span>
             </div>
             <div class="col-3 info">
                 <span>Telepon Rumah : {{ session()->get('user.phoneNumber') }}</span>
@@ -39,26 +39,28 @@
     </header>
 
     <div class="main">
-        <div class="navigation">
-            <nav class="row">
-                <li class="col-6">
-                    <a href="/currency">
-                        <i class="far fa-money-bill-alt fa-2x"></i>
-                        <span>Valuta</span>
-                    </a>
-                </li>
-                <li class="col-6">
-                    <a href="/appointment">
-                        <i class="far fa-clock fa-2x"></i>
-                        <span>Jadwal Pertemuan</span>
-                    </a>
-                </li>
-            </nav>
-        </div>
-
-        @yield('appointment')
-        @yield('currency')
-        @yield('welcome')
+        @if (session()->get('user.isActivated'))
+            <div class="navigation">
+                <nav class="row">
+                    <li class="col-6">
+                        <a href="/currency">
+                            <i class="far fa-money-bill-alt fa-2x"></i>
+                            <span>Valuta</span>
+                        </a>
+                    </li>
+                    <li class="col-6">
+                        <a href="/appointment">
+                            <i class="far fa-clock fa-2x"></i>
+                            <span>Jadwal Pertemuan</span>
+                        </a>
+                    </li>
+                </nav>
+            </div>
+            @yield('appointment')
+            @yield('currency')
+        @else
+            @yield('revision')
+        @endif
     </div>
 
 </body>

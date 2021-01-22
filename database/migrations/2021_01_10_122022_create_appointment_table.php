@@ -19,7 +19,10 @@ class CreateAppointmentTable extends Migration
             $table->string('status');
             $table->date('date');
             $table->time('time');
-            $table->int('toExchangeAmount');
+            $table->integer('toExchangeAmount');
+            $table->integer('toReceiveAmount');
+            $table->string('toExchangeCurrencyName');
+            $table->string('toReceiveCurrencyName');
             $table->timestamps();
         });
     }

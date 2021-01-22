@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\MoneyChangerController;
-use App\Http\Controllers\OfficeHourController;
-use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\WelcomePageController;
+use App\Http\Controllers\RegisterPageController;
+use App\Http\Controllers\LoginPageController;
+use App\Http\Controllers\LogOutController;
+use App\Http\Controllers\RevisionPageController;
+use App\Http\Controllers\AppointmentPageController;
+use App\Http\Controllers\CurrencyPageController;
+use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\EditProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,53 +22,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    if(session()->has('user.id')) {
-        return redirect('appointment');
-    }
-    return view('other-views/mc_welcome');
-});
+/*
+---------- Money Changer ----------
+*/
+
+Route::get('/', [WelcomePageController::class, 'navigateToWelcomePage']);
+
+// Authentication
+Route::get('/login', [LoginPageController::class, 'navigateToLoginPage']);
+Route::post('/login', [LoginPageController::class, 'login'])->name('login');
+
+Route::get('/register', [RegisterPageController::class, 'navigateToRegisterPage']);
+Route::post('/register', [RegisterPageController::class, 'signUpNewMoneyChanger'])->name('register');
+
+Route::get('/logout', [LogOutController::class, 'logout']);
+
+// Revision Page
+Route::get('/revision', [RevisionPageController::class, 'getRevisionNote'])->name('revision');
+Route::get('/editProfile', [RevisionPageController::class, 'navigateToEditProfile']);
+Route::get('/editProfile', [EditProfileController::class, 'showMoneyChangerInfo'])->name('showEditProfilePage');
+Route::post('/updateMC', [EditProfileController::class, 'updateMoneyChangerInfo'])->name('editProfile');
+
+// Currency Page
+Route::get('/currency', [CurrencyPageController::class, 'showCurrencies'])->name('currency');
+Route::post('/currency', [CurrencyPageController::class, 'addNewCurrency'])->name('addNewCurrency');
+Route::post('/editCurrency', [CurrencyPageController::class, 'handleUbahButton'])->name('editCurrency');
+
+// Appointment Page
+Route::get('/appointment', [AppointmentPageController::class, 'showAppointments'])->name('appointment');
+Route::post('/appointment', [AppointmentPageController::class, 'finishAppointment'])->name('finishAppointment');
 
 /*
----------- Authentication ----------
+---------- Admin ----------
 */
-Route::get('/login', function () {
-    if(session()->has('user.id')) {
-        return redirect('appointment');
-    }
-    return view('other-views/mc_login');
-});
-Route::post('/login', [AuthController::class, 'webUserLogin'])->name('login');
-
-Route::get('/register', function () {
-    if(session()->has('user.id')) {
-        return redirect('appointment');
-    }
-    return view('other-views/mc_register');
-});
-Route::post('/register', [AuthController::class, 'signUpNewMoneyChanger'])->name('register');
-
-Route::get('/logout', [AuthController::class, 'logOut']);
-
-/*
----------- Currency View ----------
-*/
-Route::get('/currency', [CurrencyController::class, 'showCurrencies'])->name('currency');
-Route::post('/currency', [CurrencyController::class, 'addNewCurrency'])->name('addNewCurrency');
-Route::post('/editCurrency', [CurrencyController::class, 'handleUbahButton'])->name('editCurrency');
-
-/*
----------- Appointment View ----------
-*/
-Route::get('/appointment', [AppointmentController::class, 'showAppointments'])->name('appointment');
-Route::post('/appointment', [AppointmentController::class, 'finishAppointment'])->name('finishAppointment');
-
-/*
----------- Edit Profiel View ----------
-*/
-Route::get('/editProfile', function () {
-    if(!session()->has('user.id')) {
-        return redirect('login');
-    }
-    return view('other-views/mc_edit_profile');
-});
+Route::get('/admin', [AdminPageController::class, 'getAllPendingMoneyChanger'])->name('admin');
+Route::post('/approveMC', [AdminPageController::class, 'approveMoneyChanger'])->name('approveMoneyChanger');
+Route::post('/giveRevision', [AdminPageController::class, 'giveRevisionNote'])->name('giveRevision');

@@ -2,21 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AppointmentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Appointment;
+use App\Models\AppointmentDetail;
 
-class AppointmentController extends Controller
+class AppointmentPageController extends Controller
 {
-
     public function showAppointments() {
-        if(!session()->has('user.id')) {
+        if(!session()->has('user')) {
             return redirect('login');
         }
 
-        $appointments = $this->getListOfAppointmenByMoneyChangerId();
+        if(session()->get('role') == 'admin') {
+            return redirect()->route('admin');
+        }
 
+        if(session()->get('user.isActivated') == false) {
+            return redirect()->route('revision');
+        }
+
+        $appointments = $this->getListOfAppointmenByMoneyChangerId();
         return view('main-view/mc_appointment', ['appointments'=>$appointments]);
     }
 
@@ -28,13 +34,12 @@ class AppointmentController extends Controller
         $appointments = DB::table('appointment')
         ->join('appointment_detail', 'appointment.id', '=', 'appointment_detail.appointmentId')
         ->join('user', 'appointment_detail.userId', '=', 'user.id')
-        ->join('currency_detail', 'appointment_detail.toReceiveCurrencyDetailId', '=', 'currency_detail.id')
-        ->join('currency', 'currency_detail.id', '=', 'currency.id')
-        ->join('money_changer', 'currency_detail.moneyChangerId', 'money_changer.id')
-        ->select('appointment.*', 'appointment_detail.toExchangeCurrencyName', 'user.userName', 'currency.currencyName')
+        ->join('money_changer', 'appointment_detail.moneyChangerId', 'money_changer.id')
+        ->select('appointment.*', 'user.userName')
         ->where('appointment.status', 'ongoing')
         ->where('money_changer.id', $moneyChangerId)
-        ->where('appointment.date', $todayDate)
+        ->where('appointment.date', '>=', $todayDate)
+        ->orderBy('appointment.orderNumber', 'asc')
         ->get();
 
         return $appointments;

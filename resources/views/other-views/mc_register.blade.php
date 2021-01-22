@@ -135,6 +135,30 @@
                                     required />
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-3 day">Sabtu</div>
+                            <div class="col-4">
+                                <input type="text" name="sabtuOpen" value="{{ old('sabtuOpen') }}" placeholder="Jam Buka"
+                                    required />
+                            </div>
+                            <div class="col-1">-</div>
+                            <div class="col-4">
+                                <input type="text" name="sabtuClose" value="{{ old('sabtuClose') }}" placeholder="Jam Tutup"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 day">Mingu</div>
+                            <div class="col-4">
+                                <input type="text" name="mingguOpen" value="{{ old('mingguOpen') }}" placeholder="Jam Buka"
+                                    required />
+                            </div>
+                            <div class="col-1">-</div>
+                            <div class="col-4">
+                                <input type="text" name="mingguClose" value="{{ old('mingguClose') }}"
+                                    placeholder="Jam Tutup" required />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -181,6 +205,7 @@
             </div>
             <button class="customButton">DAFTAR AKUN BARU</button>
         </form>
+        <p class="text-center">Atau lakukan Sign In <a href="/login">di sini</a></p>
     </div>
 @endsection
 

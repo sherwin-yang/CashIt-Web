@@ -113,6 +113,12 @@ header div .info div .log-out {
     padding: 25px 25px;
 }
 
+.no_data {
+    text-align: center;
+    font-size: 22px;
+    color: #a7a7a7;
+}
+
 /* myModal */
 .myModal {
     position: fixed;
@@ -175,7 +181,7 @@ header div .info div .log-out {
 }
 
 .myModal .content .action-button button {
-    margin: 5px;
+    margin: 10px;
 }
 
 #overlay {
@@ -298,37 +304,17 @@ header div .info div .log-out {
     margin: 0 5px;
 }
 
-/*
-.editform input[type="text"] {
-    height: 20px;
-    flex: 0 0 260px;
-    margin-left: 10px;
-    margin-right: 10px;
+/* revision */
+
+.revision {
+    margin: 20px;
 }
 
-.editform input[type="password"] {
-    height: 20px;
-    flex: 0 0 260px;
-    margin-left: 10px;
-    margin-right: 10px;
+.mc_revision_note {
+    color: red;
 }
 
-.editform label {
+.myModal .content .coordinate-span {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
-    width: 490px;
-    line-height: 26px;
-    margin-bottom: 10px;
+    align-items: center;
 }
-
-.editform input[type="hour"] {
-    position: relative;
-    width: 22%;
-    padding: 5px;
-    height: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-*/

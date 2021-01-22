@@ -45,3 +45,11 @@ function updateCurrency(currencyName, sellPrice, buyPrice, currencyId) {
 function finishTransaction(appointmentId) {
     document.getElementById("appointmentId").value = appointmentId;
 }
+
+function approveMC(moneyChangerId) {
+    document.getElementById("moneyChanger_id").value = moneyChangerId;
+}
+
+function giveRevise(moneyChangerId) {
+    document.getElementById("moneyChangerId").value = moneyChangerId;
+}

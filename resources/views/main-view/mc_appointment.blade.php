@@ -5,34 +5,39 @@
 @section('appointment')
 
     <div class="appointment">
-        <table class="table table-striped table-hover">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Kode Antrian</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Waktu</th>
-                        <th scope="col">Penukaran</th>
-                        <th scope="col">Tindakan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($appointments as $appointment)
+        @if (count($appointments) > 0)
+            <table class="table table-striped table-hover">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <th scope="row">{{ $appointment->orderNumber }}</th>
-                            <td>{{ $appointment->userName }}</td>
-                            <td>{{ $appointment->time }}</td>
-                            <td>{{ $appointment->toExchangeCurrencyName . $appointment->toExchangeAmount . ' ke ' . $appointment->currencyName }}
-                            </td>
-                            <td>
-                                <button class="btn btn-danger" onclick="finishTransaction('{{ $appointment->id }}')"
-                                    data-modal-target="#finishTransaction">Selesaikan</button>
-                            </td>
+                            <th scope="col">Tgl - Kode Antrian</th>
+                            <th scope="col">Nama Customer</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">Jumlah Penukaran</th>
+                            <th scope="col">Tindakan</th>
                         </tr>
-                    @endforeach
-                </tbody>
+                    </thead>
+                    <tbody>
+                        @foreach ($appointments as $appointment)
+                            <tr>
+                                <th scope="row">{{ $appointment->orderNumber }}</th>
+                                <td>{{ $appointment->userName }}</td>
+                                <td>{{ $appointment->time }}</td>
+                                <td>{{ $appointment->toExchangeCurrencyName . $appointment->toExchangeAmount . '->' . $appointment->toReceiveCurrencyName }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="finishTransaction('{{ $appointment->id }}')"
+                                        data-modal-target="#finishTransaction">Selesaikan</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </table>
-        </table>
+        @else
+            <p class="no_data">Saat ini anda belum memiliki jadwal dengan customer.</p>
+        @endif
+
     </div>
 
     {{-- Finish Appointment --}}

@@ -7,24 +7,27 @@ use App\Models\Currency;
 use App\Models\CurrencyDetail;
 use Illuminate\Support\Facades\DB;
 
-class CurrencyController extends Controller
+class CurrencyPageController extends Controller
 {
     public function showCurrencies()
     {
-        if(!session()->has('user.id')) {
+        if(!session()->has('user')) {
             return redirect('login');
         }
 
-        $currencies = $this->getListOfCurrencyByMoneyChangerId();
+        if(session()->get('role') == 'admin') {
+            return redirect()->route('admin');
+        }
 
+        if(session()->get('user.isActivated') == false) {
+            return redirect()->route('revision');
+        }
+
+        $currencies = $this->getListOfCurrencyByMoneyChangerId();
         return view('main-view.mc_currency', ['currencies'=>$currencies]);
     }
 
-    public function test() {
-        return redirect()->route('currency');
-    }
-
-    public function getListOfCurrencyByMoneyChangerId() {
+    private function getListOfCurrencyByMoneyChangerId() {
         $moneyChangerId = session()->get('user.id');
 
         $currencies = DB::table('currency')

@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label> Password : </label>
+                        <label> Kata Sandi : </label>
                     </div>
                     <div class="col-6">
                         <input type="password" name="password" required />
@@ -26,5 +26,6 @@
             </div>
             <button class="customButton">MASUK KE AKUN ANDA</button>
         </form>
+        <p class="text-center">Atau lakukan Sign Up <a href="/register">di sini</a></p>
     </div>
 @endsection

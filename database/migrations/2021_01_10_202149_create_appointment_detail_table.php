@@ -15,13 +15,12 @@ class CreateAppointmentDetailTable extends Migration
     {
         Schema::create('appointment_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('userId')->unsigned();
-            $table->foreign('userId')->references('id')->on('user')->onDelete('cascade');
             $table->bigInteger('appointmentId')->unsigned();
             $table->foreign('appointmentId')->references('id')->on('appointment')->onDelete('cascade');
-            $table->string('toExchangeCurrencyName');
-            $table->bigInteger('toReceiveCurrencyDetailId')->unsigned();
-            $table->foreign('toReceiveCurrencyDetailId')->references('id')->on('currency_detail')->onDelete('cascade');
+            $table->bigInteger('userId')->unsigned();
+            $table->foreign('userId')->references('id')->on('user')->onDelete('cascade');
+            $table->bigInteger('moneyChangerId')->unsigned();
+            $table->foreign('moneyChangerId')->references('id')->on('money_changer')->onDelete('cascade');
             $table->timestamps();
         });
     }

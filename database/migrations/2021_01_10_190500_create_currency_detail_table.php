@@ -15,10 +15,10 @@ class CreateCurrencyDetailTable extends Migration
     {
         Schema::create('currency_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('moneyChangerId')->unsigned();
-            $table->foreign('moneyChangerId')->references('id')->on('money_changer')->onDelete('cascade');
             $table->bigInteger('currencyId')->unsigned();
             $table->foreign('currencyId')->references('id')->on('currency')->onDelete('cascade');
+            $table->bigInteger('moneyChangerId')->unsigned();
+            $table->foreign('moneyChangerId')->references('id')->on('money_changer')->onDelete('cascade');
             $table->timestamps();
         });
     }
