@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EditProfileController extends Controller
+class EditProfilePageController extends Controller
 {
     public function showMoneyChangerInfo() {
         if(!session()->has('user')) {

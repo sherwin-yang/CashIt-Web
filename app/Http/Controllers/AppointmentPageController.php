@@ -64,7 +64,7 @@ class AppointmentPageController extends Controller
     public function makeNewAppointment(Request $request) {
         $appointmentDate = $request->date;
         $moneyChangerId = $request->moneyChangerId;
-        $numberOfOrders = $this->countNumberOfAppointment($request, $moneyChangerId);
+        $numberOfOrders = $this->countNumberOfAppointment($appointmentDate, $moneyChangerId);
 
         $appointment = $this->saveAppointmentData($request, $appointmentDate, $numberOfOrders);
 
@@ -82,6 +82,9 @@ class AppointmentPageController extends Controller
         $newAppointment->date = $appointmentDate;
         $newAppointment->time = $request->time;
         $newAppointment->toExchangeAmount = $request->toExchangeAmount;
+        $newAppointment->toExchangeCurrencyName = $request->toExchangeCurrencyName;
+        $newAppointment->toReceiveAmount = $request->toReceiveAmount;
+        $newAppointment->toReceiveCurrencyName = $request->toReceiveCurrencyName;
         $newAppointment->save();
         $this->saveAppointmentDetailData($request, $newAppointment->id);
 
@@ -92,21 +95,16 @@ class AppointmentPageController extends Controller
         $newAppointmentDetail = new AppointmentDetail();
         $newAppointmentDetail->userId = $request->userId;
         $newAppointmentDetail->appointmentId = $newAppointmentId;
-        $newAppointmentDetail->toExchangeCurrencyName = $request->toExchangeCurrencyName;
-        $newAppointmentDetail->toReceiveCurrencyDetailId = $request->toReceiveCurrencyDetailId;
+        $newAppointmentDetail->moneyChangerId = $request->moneyChangerId;
         $newAppointmentDetail->save();
     }
 
-    private function countNumberOfAppointment(Request $request, Int $moneyChangerId) {
+    private function countNumberOfAppointment($appointmentDate, Int $moneyChangerId) {
         $appointments = DB::table('appointment')
         ->join('appointment_detail', 'appointment.id', '=', 'appointment_detail.appointmentId')
-        ->join('user', 'appointment_detail.userId', '=', 'user.id')
-        ->join('currency_detail', 'appointment_detail.toReceiveCurrencyDetailId', '=', 'currency_detail.id')
-        ->join('currency', 'currency_detail.id', '=', 'currency.id')
-        ->join('money_changer', 'currency_detail.moneyChangerId', 'money_changer.id')
-        ->select('appointment.*', 'user.userName', 'currency.currencyName')
+        ->join('money_changer', 'appointment_detail.moneyChangerId', 'money_changer.id')
         ->where('money_changer.id', $moneyChangerId)
-        ->where('appointment.date', $request->date)
+        ->where('appointment.date', $appointmentDate)
         ->get();
 
         $numberOfAppointment = count($appointments)+1;

@@ -30,7 +30,7 @@ class RegisterPageController extends Controller
         $this->saveMoneyChangerData($request);
 
         echo '<script language="javascript"> alert("Registrasi Berhasil!") </script>';
-        return view('other-views.mc_login');
+        return view('other-views.login');
     }
 
     private function saveMoneyChangerData(Request $request) {
@@ -79,13 +79,13 @@ class RegisterPageController extends Controller
         $fridayOfficeHour->save();
         $this->saveOfficeHourDetailData($moneyChangerId, $fridayOfficeHour->id);
         $saturdayOfficeHour = new OfficeHour();
-        $saturdayOfficeHour->day = 'Friday';
+        $saturdayOfficeHour->day = 'Saturday';
         $saturdayOfficeHour->openTime = $request->sabtuOpen;
         $saturdayOfficeHour->closeTime = $request->sabtuClose;
         $saturdayOfficeHour->save();
         $this->saveOfficeHourDetailData($moneyChangerId, $saturdayOfficeHour->id);
         $sundayOfficeHour = new OfficeHour();
-        $sundayOfficeHour->day = 'Friday';
+        $sundayOfficeHour->day = 'Sunday';
         $sundayOfficeHour->openTime = $request->mingguOpen;
         $sundayOfficeHour->closeTime = $request->mingguClose;
         $sundayOfficeHour->save();

@@ -10,6 +10,6 @@ class WelcomePageController extends Controller
         if(session()->has('user.id')) {
             return redirect('appointment');
         }
-        return view('other-views/mc_welcome');
+        return view('other-views.welcome');
     }
 }

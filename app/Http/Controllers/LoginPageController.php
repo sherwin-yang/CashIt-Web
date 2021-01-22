@@ -14,7 +14,7 @@ class LoginPageController extends Controller
         if(session()->has('user')) {
             return redirect('appointment');
         }
-        return view('other-views/mc_login');
+        return view('other-views.login');
     }
 
     public function login(Request $request) {
@@ -29,7 +29,7 @@ class LoginPageController extends Controller
         }
 
         if(!$user || !Hash::check($request->password, $user->password)) {
-            return view('other-views.mc_login');
+            return view('other-views.login');
         }
 
         $request->session()->put('user', $user);

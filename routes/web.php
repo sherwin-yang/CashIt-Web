@@ -8,7 +8,7 @@ use App\Http\Controllers\RevisionPageController;
 use App\Http\Controllers\AppointmentPageController;
 use App\Http\Controllers\CurrencyPageController;
 use App\Http\Controllers\AdminPageController;
-use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\EditProfilePageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +40,8 @@ Route::get('/logout', [LogOutController::class, 'logout']);
 // Revision Page
 Route::get('/revision', [RevisionPageController::class, 'getRevisionNote'])->name('revision');
 Route::get('/editProfile', [RevisionPageController::class, 'navigateToEditProfile']);
-Route::get('/editProfile', [EditProfileController::class, 'showMoneyChangerInfo'])->name('showEditProfilePage');
-Route::post('/updateMC', [EditProfileController::class, 'updateMoneyChangerInfo'])->name('editProfile');
+Route::get('/editProfile', [EditProfilePageController::class, 'showMoneyChangerInfo'])->name('showEditProfilePage');
+Route::post('/updateMC', [EditProfilePageController::class, 'updateMoneyChangerInfo'])->name('editProfile');
 
 // Currency Page
 Route::get('/currency', [CurrencyPageController::class, 'showCurrencies'])->name('currency');

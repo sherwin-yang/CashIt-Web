@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentPageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CurrencyController;
-use App\Http\Controllers\MoneyChangerController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,4 +37,4 @@ Route::post('/customerRegister', [AuthController::class, 'registerNewCustomer'])
 ---------- Appointment ----------
 */
 
-Route::post('/makeNewAppointment', [AppointmentController::class, 'makeNewAppointment']);
+Route::post('/makeNewAppointment', [AppointmentPageController::class, 'makeNewAppointment']);
