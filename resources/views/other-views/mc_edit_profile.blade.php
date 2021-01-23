@@ -3,6 +3,7 @@
 @section('editProfile')
     <div class="form">
         <form action="{{ route('editProfile') }}" method="POST">
+            @csrf
             <div class="row">
                 <div class="row">
                     <div class="col-6 ">
@@ -25,7 +26,8 @@
                         Nomor WhatsApp :
                     </div>
                     <div class="col-6">
-                        <input type="text" name="WANumber" value="{{ session()->get('user.whatsAppNumber') }}" required />
+                        <input type="text" name="whatsAppNumber" value="{{ session()->get('user.whatsAppNumber') }}"
+                            required />
                     </div>
                 </div>
                 <div class="row">
@@ -44,6 +46,8 @@
                         @foreach ($officeHours as $officeHour)
                             <div class="row">
                                 <div class="col-3 day"> {{ $officeHour->day }}</div>
+                                <input type="hidden" name="{{ $officeHour->day . 'Id' }}" value="{{ $officeHour->id }}"
+                                    required />
                                 <div class="col-4">
                                     <input type="text" name="{{ $officeHour->day . 'Open' }}" placeholder="Jam Buka"
                                         value="{{ $officeHour->openTime }}" required />
