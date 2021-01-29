@@ -53,3 +53,13 @@ function approveMC(moneyChangerId) {
 function giveRevise(moneyChangerId) {
     document.getElementById("moneyChangerId").value = moneyChangerId;
 }
+
+if (window.location.pathname == "/currency") {
+    document.getElementById("currency-nav").style.borderBottom =
+        "3px solid #6610f2";
+    document.getElementById("appointment-nav").style.borderBottom = "none";
+} else if (window.location.pathname == "/appointment") {
+    document.getElementById("currency-nav").style.borderBottom = "none";
+    document.getElementById("appointment-nav").style.borderBottom =
+        "3px solid #6610f2";
+}

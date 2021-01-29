@@ -7,7 +7,8 @@
             <div class="row">
                 <div class="row">
                     <div class="col-6 ">
-                        Nama Toko :
+                        Nama Toko <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 6 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" name="name" value="{{ session()->get('user.moneyChangerName') }}" required />
@@ -15,7 +16,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Alamat :
+                        Alamat <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 12 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" name="address" value="{{ session()->get('user.address') }}" required />
@@ -23,7 +25,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Nomor WhatsApp :
+                        Nomor WhatsApp <span class="required-star">*</span> :
+                        <span class="register-validation">(10-13 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" name="whatsAppNumber" value="{{ session()->get('user.whatsAppNumber') }}"
@@ -32,7 +35,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Nomor Telepon (Kantor) :
+                        Nomor Telepon (Kantor) <span class="required-star">*</span> :
+                        <span class="register-validation">(6-10 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" name="phoneNumber" value="{{ session()->get('user.phoneNumber') }}" required />
@@ -45,7 +49,7 @@
                     <div class="col-6 operational">
                         @foreach ($officeHours as $officeHour)
                             <div class="row">
-                                <div class="col-3 day"> {{ $officeHour->day }}</div>
+                                <div class="col-3 day"> {{ $officeHour->day }} <span class="required-star">*</span> </div>
                                 <input type="hidden" name="{{ $officeHour->day . 'Id' }}" value="{{ $officeHour->id }}"
                                     required />
                                 <div class="col-4">

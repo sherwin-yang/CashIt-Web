@@ -8,7 +8,8 @@
             <div class="row">
                 <div class="row">
                     <div class="col-6 ">
-                        Nama Toko :
+                        Nama Toko <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 6 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
@@ -22,7 +23,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Alamat Lengkap :
+                        Alamat Lengkap <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 12 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" class="{{ $errors->has('address') ? 'is-invalid' : '' }}" name="address"
@@ -36,7 +38,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Nomor WhatsApp :
+                        Nomor WhatsApp <span class="required-star">*</span> :
+                        <span class="register-validation">(10-13 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" class="{{ $errors->has('whatsAppNumber') ? 'is-invalid' : '' }}"
@@ -50,7 +53,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Nomor Telepon (Kantor) :
+                        Nomor Telepon (Kantor) <span class="required-star">*</span> :
+                        <span class="register-validation">(6-10 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="text" class="{{ $errors->has('phoneNumber') ? 'is-invalid' : '' }}" name="phoneNumber"
@@ -76,7 +80,7 @@
                     </div>
                     <div class="col-6 operational">
                         <div class="row">
-                            <div class="col-3 day">Senin</div>
+                            <div class="col-3 day">Senin <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="seninOpen" value="{{ old('seninOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -88,7 +92,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Selasa</div>
+                            <div class="col-3 day">Selasa <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="selasaOpen" value="{{ old('selasaOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -100,7 +104,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Rabu</div>
+                            <div class="col-3 day">Rabu <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="rabuOpen" value="{{ old('rabuOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -112,7 +116,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Kamis</div>
+                            <div class="col-3 day">Kamis <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="kamisOpen" value="{{ old('kamisOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -124,7 +128,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Jumat</div>
+                            <div class="col-3 day">Jumat <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="jumatOpen" value="{{ old('jumatOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -136,7 +140,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Sabtu</div>
+                            <div class="col-3 day">Sabtu <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="sabtuOpen" value="{{ old('sabtuOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -148,7 +152,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 day">Mingu</div>
+                            <div class="col-3 day">Minggu <span class="required-star">*</span> </div>
                             <div class="col-4">
                                 <input type="text" name="mingguOpen" value="{{ old('mingguOpen') }}" placeholder="Jam Buka"
                                     required />
@@ -163,7 +167,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Email :
+                        Email <span class="required-star">*</span> :
                     </div>
                     <div class="col-6">
                         <input type="email" class="{{ $errors->has('email') ? 'is-invalid' : '' }}" name="email"
@@ -177,7 +181,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Kata Sandi :
+                        Kata Sandi <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 6 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="password" class="{{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" />
@@ -190,7 +195,8 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        Konfirmasi Kata Sandi :
+                        Konfirmasi Kata Sandi <span class="required-star">*</span> :
+                        <span class="register-validation">(Minimal 6 karakter)</span>
                     </div>
                     <div class="col-6">
                         <input type="password" class="{{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"

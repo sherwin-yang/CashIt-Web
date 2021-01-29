@@ -43,13 +43,13 @@
             <div class="navigation">
                 <nav class="row">
                     <li class="col-6">
-                        <a href="/currency">
+                        <a href="/currency" id="currency-nav" class="path">
                             <i class="far fa-money-bill-alt fa-2x"></i>
                             <span>Valuta</span>
                         </a>
                     </li>
                     <li class="col-6">
-                        <a href="/appointment">
+                        <a href="/appointment" id="appointment-nav" class="path">
                             <i class="far fa-clock fa-2x"></i>
                             <span>Jadwal Pertemuan</span>
                         </a>

@@ -37,7 +37,7 @@ header div .info {
 header div .photo-status .photo {
     width: 125px;
     height: 125px;
-    background-image: url("../assets/cover.jpg");
+    background-image: url("../assets/mc_pp.jpeg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -87,8 +87,8 @@ header div .info div .log-out {
 
 .navigation nav li:hover {
     cursor: pointer;
-    padding: 10px 0 7px 0;
-    border-bottom: 3px solid #6610f2;
+    /* padding: 10px 0 7px 0; */
+    background-color: #e5e5e5;
 }
 
 .navigation nav li a {
@@ -103,7 +103,8 @@ header div .info div .log-out {
 
 /* appointment/currency table */
 .appointment,
-.currency {
+.currency,
+.mc_detail {
     border-radius: 5px;
     border: 1px solid #e5e5e5;
     background-color: #ffffff;
@@ -233,10 +234,11 @@ header div .info div .log-out {
 }
 
 .form {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow: scroll;
 }
 
 .form form {
@@ -265,6 +267,14 @@ header div .info div .log-out {
     flex-direction: row;
     justify-content: center;
     margin: 10px 0;
+}
+
+.required-star {
+    color: red;
+}
+
+.register-validation {
+    font-size: 12px;
 }
 
 /* Set a style for the submit button */
@@ -317,4 +327,18 @@ header div .info div .log-out {
 .myModal .content .coordinate-span {
     display: flex;
     align-items: center;
+}
+
+/* admin */
+
+.admin-action {
+    display: flex;
+}
+
+.admin-action button {
+    margin: 0 2px;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
 }

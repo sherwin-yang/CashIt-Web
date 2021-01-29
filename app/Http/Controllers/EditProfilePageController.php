@@ -30,7 +30,7 @@ class EditProfilePageController extends Controller
         return view('other-views.mc_edit_profile', ['officeHours'=>$officeHours]);
     }
 
-    public function updateMoneyChangerInfo(Request $request) {
+    public function updateMoneyChanger(Request $request) {
         if($request->button == 'ubah') {
             $moneyChanger = MoneyChanger::find(session()->get('user.id'));
             $moneyChanger->moneyChangerName = $request->name;

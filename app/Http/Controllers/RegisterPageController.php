@@ -24,7 +24,6 @@ class RegisterPageController extends Controller
             'password' => 'required|min:6|confirmed',
             'address' => 'required|min:12',
             'whatsAppNumber' => 'required|min:10|max:13',
-            'phoneNumber' => 'required|min:8|max:10'
         ]);
 
         $this->saveMoneyChangerData($request);

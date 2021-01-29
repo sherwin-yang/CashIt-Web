@@ -15,10 +15,63 @@
 </head>
 
 <body>
-    <div class="main">
-        <p>hi!</p>
-    </div>
-
+    <header>
+        <form action="{{ route('admin') }}">
+            <button name="button" class="btn btn-primary">Kembali</button>
+            <br>
+            <br>
+        </form>
+        <div class="mc_detail">
+            <div class="row">
+                <div class="col-2">
+                    <h5>Nama</h5>
+                </div>
+                <div class="col-2">
+                    <p>{{ $moneyChanger->moneyChangerName }}</p>
+                </div>
+            </div>
+            <hr class="solid">
+            <div class="row">
+                <div class="col-2">
+                    <h5>Alamat</h5>
+                </div>
+                <div class="col-2">
+                    <p>{{ $moneyChanger->address }}</p>
+                </div>
+            </div>
+            <hr class="solid">
+            <div class="row">
+                <div class="col-2">
+                    <h5>Nomor WhatsApp</h5>
+                </div>
+                <div class="col-2">
+                    <p>{{ $moneyChanger->whatsAppNumber }}</p>
+                </div>
+            </div>
+            <hr class="solid">
+            <div class="row">
+                <div class="col-2">
+                    <h5>Nomor Telepon</h5>
+                </div>
+                <div class="col-2">
+                    <p>{{ $moneyChanger->phoneNumber }}</p>
+                </div>
+            </div>
+            <hr class="solid">
+            <div class="row">
+                <div class="col-2">
+                    <h5>Jam Operasional</h5>
+                </div>
+                @foreach ($officeHours as $officeHour)
+                    <div class="col">
+                        <h5>{{ $officeHour->day }}</h5>
+                        <p><span>Buka :</span> {{ $officeHour->openTime }}</p>
+                        <p><span>Tutup :</span> {{ $officeHour->closeTime }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </header>
 </body>
 
 </html>

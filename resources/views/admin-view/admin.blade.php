@@ -39,11 +39,15 @@
                         <tr>
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ $moneyChanger->moneyChangerName }}</td>
-                            <td>
+                            <td class="admin-action">
                                 <button type="button" class="btn btn-success" data-modal-target="#approve"
                                     onclick="approveMC('{{ $moneyChanger->id }}')">Setujui</button>
                                 <button type="button" class="btn btn-dark" data-modal-target="#giveRevision"
                                     onclick="giveRevise('{{ $moneyChanger->id }}')">Beri Revisi</button>
+                                <form action="{{ route('view_mcDetail') }}" method="GET">
+                                    <input type="hidden" name="moneyChangerId" value="{{ $moneyChanger->id }}">
+                                    <button name="button" class="btn btn-outline-primary">Detail</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

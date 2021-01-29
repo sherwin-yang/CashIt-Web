@@ -8,6 +8,7 @@ use App\Http\Controllers\RevisionPageController;
 use App\Http\Controllers\AppointmentPageController;
 use App\Http\Controllers\CurrencyPageController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\AdminViewMCDetailController;
 use App\Http\Controllers\EditProfilePageController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,9 +40,8 @@ Route::get('/logout', [LogOutController::class, 'logout']);
 
 // Revision Page
 Route::get('/revision', [RevisionPageController::class, 'getRevisionNote'])->name('revision');
-Route::get('/editProfile', [RevisionPageController::class, 'navigateToEditProfile']);
 Route::get('/editProfile', [EditProfilePageController::class, 'showMoneyChangerInfo'])->name('showEditProfilePage');
-Route::post('/updateMC', [EditProfilePageController::class, 'updateMoneyChangerInfo'])->name('editProfile');
+Route::post('/updateMC', [EditProfilePageController::class, 'updateMoneyChanger'])->name('editProfile');
 
 // Currency Page
 Route::get('/currency', [CurrencyPageController::class, 'showCurrencies'])->name('currency');
@@ -58,3 +58,4 @@ Route::post('/appointment', [AppointmentPageController::class, 'finishAppointmen
 Route::get('/admin', [AdminPageController::class, 'getAllPendingMoneyChanger'])->name('admin');
 Route::post('/approveMC', [AdminPageController::class, 'approveMoneyChanger'])->name('approveMoneyChanger');
 Route::post('/giveRevision', [AdminPageController::class, 'giveRevisionNote'])->name('giveRevision');
+Route::get('/mcDetail', [AdminViewMCDetailController::class, 'showMoneyChangerDetails'])->name('view_mcDetail');
