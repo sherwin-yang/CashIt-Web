@@ -22,4 +22,8 @@ class AppointmentDetail extends Model
     public function currencyDetail() {
         return $this->belongsTo(CurrencyDetail::class);
     }
+
+    public function review() {
+        return $this->hasOne(Review::class);
+    }
 }

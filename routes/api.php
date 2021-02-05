@@ -26,15 +26,14 @@ Route::post('/customerLogin', [ApiServicesController::class, 'customerLogin']);
 Route::post('/customerRegister', [ApiServicesController::class, 'registerCustomer']);
 
 /* ---------- Main 1/2 ---------- */
-Route::get('/getMoneyChangerByTo_ExchangReceive', [ApiServicesController::class, 'getMoneyChangerByTo_ExchangReceive']);
+// Route::get('/getMoneyChangerByTo_ExchangReceive', [ApiServicesController::class, 'getMoneyChangerByTo_ExchangReceive']);
 Route::get('/getAllMoneyChanger', [ApiServicesController::class, 'getAllMoneyChanger']);
 
-Route::get('/getCurrencyByMoneyChangerId', [ApiServicesController::class, 'getCurrencyByMoneyChangerId']);
-Route::get('/getOfficeHourByMoneyChangerId', [ApiServicesController::class, 'getOfficeHourByMoneyChangerId']);
-Route::get('/getAllReviewsByMoneyChangerId', [ApiServicesController::class, 'getAllReviewsByMoneyChangerId']);
+Route::get('/getCurrencyByMoneyChangerId/{id}', [ApiServicesController::class, 'getCurrencyByMoneyChangerId']);
+Route::get('/getOfficeHourByMoneyChangerId/{id}', [ApiServicesController::class, 'getOfficeHourByMoneyChangerId']);
+Route::get('/getAllReviewsByMoneyChangerId/{id}', [ApiServicesController::class, 'getAllReviewsByMoneyChangerId']);
 Route::post('/makeNewAppointment', [ApiServicesController::class, 'makeNewAppointment']);
 
 /* ---------- Main 3 ---------- */
-Route::get('/getAppointmentsByUserId', [ApiServicesController::class, 'getAppointmentsByUserId']);
-Route::get('/getMoneyChangerFilteredByAppointment', [ApiServicesController::class, 'getMoneyChangerFilteredByAppointment']);
-Route::get('/getAppointmentDetailFilteredByAppointment', [ApiServicesController::class, 'getAppointmentDetailFilteredByAppointment']);
+Route::get('/getAppointmentsByUserId/{id}', [ApiServicesController::class, 'getAppointmentsByUserId']);
+Route::post('/giveReview', [ApiServicesController::class, 'giveReview']);

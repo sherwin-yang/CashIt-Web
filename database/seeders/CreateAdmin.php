@@ -15,10 +15,10 @@ class CreateAdmin extends Seeder
      */
     public function run()
     {
-        DB::table('admin')->insert([
-            'adminName' => 'Sherwin Yang',
-            'email' => 'sher.yang79@gmail.com',
-            'password' => Hash::make('sherwin7879'),
-        ]);
+        // DB::table('admin')->insert([
+        //     'adminName' => 'Sherwin Yang',
+        //     'email' => 'sher.yang79@gmail.com',
+        //     'password' => Hash::make('sherwin7879'),
+        // ]);
     }
 }
