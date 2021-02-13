@@ -26,7 +26,7 @@ Route::post('/customerLogin', [ApiServicesController::class, 'customerLogin']);
 Route::post('/customerRegister', [ApiServicesController::class, 'registerCustomer']);
 
 /* ---------- Main 1/2 ---------- */
-// Route::get('/getMoneyChangerByTo_ExchangReceive', [ApiServicesController::class, 'getMoneyChangerByTo_ExchangReceive']);
+Route::get('/getMoneyChangerByTo_ExchangReceive', [ApiServicesController::class, 'getMoneyChangerByTo_ExchangReceive']);
 Route::get('/getAllMoneyChanger', [ApiServicesController::class, 'getAllMoneyChanger']);
 
 Route::get('/getCurrencyByMoneyChangerId/{id}', [ApiServicesController::class, 'getCurrencyByMoneyChangerId']);

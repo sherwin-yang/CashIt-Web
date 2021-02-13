@@ -41,7 +41,7 @@ class ApiServicesController extends Controller
     ---------- Register ----------
     */
     public function registerCustomer(Request $request) {
-        if(!$request->name || !$request->email || $request->password) {
+        if(!$request->name || !$request->email || !$request->password) {
             return response([
                 ['Request sent incompleted or does not match with request name']
             ], 404);
@@ -63,25 +63,101 @@ class ApiServicesController extends Controller
         $toExchange = $request->toExchangeCurrencyName;
         $toReceive = $request->toReceiveCurrencyName;
 
-        $result = DB::table('money_changer')
-        ->join('currency_detail', 'currency_detail.moneyChangerId', '=', 'money_changer.id')
-        ->join('currency', 'currency.id', '=', 'currency_detail.currencyId')
-        ->select('money_changer.*')
-        ->where(['currency.currencyName' => $toReceive, 'currency.currencyName' => $toExchange])
-        ->groupBy("money_changer.id")
-        ->get();
-
-        $rs = [];
-        foreach($result as $r) {
-            $rs[] = $r->id;
+        if(!$toExchange || !$toReceive) {
+            return response([
+                ['Request sent incompleted or does not match with request name']
+            ], 404);
         }
 
-        $response = [
-            "mc" => $result,
-            "id" => $rs
-        ];
+        $result = $this->calculateExchangeRate($toExchange, $toReceive);
 
-        return response($response);
+        return response($result);
+    }
+
+    private function calculateExchangeRate($toExchange, $toReceive) {
+        $moneyChanger = NULL;
+
+        if($toExchange == "IDR") {
+            $filteredMoneyChanger = DB::table('money_changer')
+            ->join('currency_detail', 'currency_detail.moneyChangerId', '=', 'money_changer.id')
+            ->join('currency', 'currency.id', '=', 'currency_detail.currencyId')
+            ->where('currency.currencyName', $toReceive)
+            ->select('money_changer.*', DB::raw('count(*) as exchangeRate, money_changer.id'))
+            ->groupBy('money_changer.id')
+            ->having('exchangeRate', 1)
+            ->get();
+
+            $moneyChanger = json_decode($filteredMoneyChanger);
+
+            for($i = 0; $i < count($moneyChanger); $i++) {
+                $receivedRate = DB::table('currency')
+                ->join('currency_detail', 'currency.id', '=', 'currency_detail.currencyId')
+                ->where('currency.currencyName', $toReceive)
+                ->where('currency_detail.moneyChangerId', $moneyChanger[$i]->id)
+                ->select('currency.sellPrice')
+                ->first();
+
+                $rate = number_format((float)1/$receivedRate->sellPrice, 10, '.', '');
+                $moneyChanger[$i]->exchangeRate = $rate;
+            }
+        }
+        else if($toReceive == "IDR") {
+            $filteredMoneyChanger = DB::table('money_changer')
+            ->join('currency_detail', 'currency_detail.moneyChangerId', '=', 'money_changer.id')
+            ->join('currency', 'currency.id', '=', 'currency_detail.currencyId')
+            ->where('currency.currencyName', $toExchange)
+            ->select('money_changer.*', DB::raw('count(*) as exchangeRate, money_changer.id'))
+            ->groupBy('money_changer.id')
+            ->having('exchangeRate', 1)
+            ->get();
+
+            $moneyChanger = json_decode($filteredMoneyChanger);
+
+            for($i = 0; $i < count($moneyChanger); $i++) {
+                $receivedRate = DB::table('currency')
+                ->join('currency_detail', 'currency.id', '=', 'currency_detail.currencyId')
+                ->where('currency.currencyName', $toExchange)
+                ->where('currency_detail.moneyChangerId', $moneyChanger[$i]->id)
+                ->select('currency.buyPrice')
+                ->first();
+
+                $rate = $receivedRate->buyPrice;
+                $moneyChanger[$i]->exchangeRate = $rate;
+            }
+        }
+        else {
+            $filteredMoneyChanger = DB::table('money_changer')
+            ->join('currency_detail', 'currency_detail.moneyChangerId', '=', 'money_changer.id')
+            ->join('currency', 'currency.id', '=', 'currency_detail.currencyId')
+            ->whereIn('currency.currencyName', [$toExchange, $toReceive])
+            ->select('money_changer.*', DB::raw('count(*) as exchangeRate, money_changer.id'))
+            ->groupBy('money_changer.id')
+            ->having('exchangeRate', 2)
+            ->get();
+
+            $moneyChanger = json_decode($filteredMoneyChanger);
+
+            for($i = 0; $i < count($moneyChanger); $i++) {
+                $toExchangeRate = DB::table('currency')
+                ->join('currency_detail', 'currency.id', '=', 'currency_detail.currencyId')
+                ->where('currency.currencyName', $toExchange)
+                ->where('currency_detail.moneyChangerId', $moneyChanger[$i]->id)
+                ->select('currency.buyPrice')
+                ->first();
+
+                $toReceiveRate = DB::table('currency')
+                ->join('currency_detail', 'currency.id', '=', 'currency_detail.currencyId')
+                ->where('currency.currencyName', $toReceive)
+                ->where('currency_detail.moneyChangerId', $moneyChanger[$i]->id)
+                ->select('currency.sellPrice')
+                ->first();
+
+                $rate = $toExchangeRate->buyPrice/$toReceiveRate->sellPrice;
+                $moneyChanger[$i]->exchangeRate = $rate;
+            }
+        }
+
+        return $moneyChanger;
     }
 
     /*
@@ -137,9 +213,8 @@ class ApiServicesController extends Controller
         $reviews = DB::table('review')
         ->join('appointment_detail', 'appointment_detail.id', '=', 'review.appointmentDetailId')
         ->join('user', 'user.id', '=', 'appointment_detail.userId')
-        ->join('money_changer', 'appointment_detail.moneyChangerId', '=', 'money_changer.id')
-        ->select('user.userName', 'review.rating', 'rating.description', 'rating.date')
-        ->where('money_changer.id', $id)
+        ->select('user.userName', 'review.rating', 'review.description', 'review.date')
+        ->where('appointment_detail.moneyChangerId', $id)
         ->get();
 
         return response($reviews);
